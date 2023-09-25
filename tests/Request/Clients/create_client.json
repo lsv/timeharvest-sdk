@@ -1,0 +1,10 @@
+{
+    "id":5737336,
+    "name":"name",
+    "is_active":true,
+    "address":"address\\nline2",
+    "statement_key":"82455699ad085d8cffc3e9a4e43ff7b8",
+    "created_at":"2017-06-26T21:39:35Z",
+    "updated_at":"2017-06-26T21:39:35Z",
+    "currency":"EUR"
+}
