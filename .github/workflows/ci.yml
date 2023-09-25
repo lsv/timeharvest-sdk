@@ -3,8 +3,6 @@ name: ci
 on:
   pull_request:
   push:
-    branches:
-      - 'master'
 
 jobs:
   ci:
@@ -57,3 +55,5 @@ jobs:
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          files: ./.build/coverage/clover.xml
