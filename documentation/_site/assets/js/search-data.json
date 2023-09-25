@@ -1,0 +1,37 @@
+{"0": {
+    "doc": "Client",
+    "title": "Client",
+    "content": ". | List clients . | Usage | Parameters | Response | . | Retrieve client | Create client | Update client | Delete client | . See how to create a $factory . List clients . Returns a list of your clients . Usage . $response = $factory-&gt;clients()-&gt;listClients($isActive, $updatedSince, $page, $perPage); foreach ($response['data'] as $client) { // $client instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientResponse } . Parameters . | Parameter | Required | Type | Description | . | $isActive | false | bool | Select only active or inactive clients | . | $updatedSince | false | DateTimeInterface | Only select clients updated after this date | . | $page | false | int | Page number | . | $perPage | false | int | How many per page | . Response . $response['meta'] instanceof \\Lsv\\TimeharvestSdk\\Response\\MetaResponse; $response['data'] array of \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientResponse . Retrieve client . Create client . Update client . Delete client . ",
+    "url": "/timeharvest-sdk/docs/clients/client.html",
+    
+    "relUrl": "/docs/clients/client.html"
+  },"1": {
+    "doc": "Clients",
+    "title": "Clients",
+    "content": " ",
+    "url": "/timeharvest-sdk/docs/clients",
+    
+    "relUrl": "/docs/clients"
+  },"2": {
+    "doc": "Contact",
+    "title": "Contact",
+    "content": "xxx . ",
+    "url": "/timeharvest-sdk/docs/clients/contact.html",
+    
+    "relUrl": "/docs/clients/contact.html"
+  },"3": {
+    "doc": "Factory",
+    "title": "Factory",
+    "content": ". | Client . | Parameters | . | Factory . | Parameters | . | . Client . $client = new \\Lsv\\TimeharvestSdk\\TimeharvestClient($accessToken,$accountId); . Parameters . | Parameter | Required | Type | Description | . | $accessToken | true | string | Access token | . | $accountId | true | string | Account ID | . Create a new set of tokens at https://id.getharvest.com/oauth2/access_tokens/new . The $accessToken is “Your token” and $accountId is “Account ID” when you have created a new set of tokens . Factory . $factory = new \\Lsv\\TimeharvestSdk\\RequestFactory($client); . Parameters . | Parameter | Required | Type | Description | . | $client | true | string | The TimeharvestClient | . ",
+    "url": "/timeharvest-sdk/docs/factory",
+    
+    "relUrl": "/docs/factory"
+  },"4": {
+    "doc": "Home",
+    "title": "Home",
+    "content": "xxx . ",
+    "url": "/timeharvest-sdk/",
+    
+    "relUrl": "/"
+  }
+}

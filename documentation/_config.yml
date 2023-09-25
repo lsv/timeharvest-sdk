@@ -1,0 +1,18 @@
+title: Timeharvest SDK
+description: PHP SDK for Timeharvest
+theme: just-the-docs
+enable_copy_code_button: true
+
+baseurl: "/timeharvest-sdk"
+url: https://lsv.github.io/
+repository: lsv/timeharvest-sdk
+
+aux_links:
+  "Template Repository":
+    - https://github.com/lsv/timeharvest-sdk
+
+back_to_top: false
+
+footer_content: ""
+gh_edit_link: false
+color_scheme: dark
