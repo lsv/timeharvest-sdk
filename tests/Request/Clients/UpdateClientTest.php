@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lsv\TimeharvestSdkTest\Request\Clients;
 
 use Lsv\TimeharvestSdk\Request\Clients\UpdateClient;
-use Lsv\TimeharvestSdk\Response\Client\ClientResponse;
+use Lsv\TimeharvestSdk\Response\Client\ClientData;
 use Lsv\TimeharvestSdkTest\Request\RequestTestCase;
 use Symfony\Component\HttpClient\Response\MockResponse;
 
@@ -32,8 +32,8 @@ class UpdateClientTest extends RequestTestCase
 
         self::assertSame('PATCH', $this->getHttpRequestOptions()['method']);
         self::assertSame([], $this->getHttpRequestOptions()['query']);
-        self::assertNull($response['meta']);
-        self::assertSame(5737336, $response['data']->id);
+        self::assertNull($response->getMeta());
+        self::assertSame(5737336, $response->getData()->id);
     }
 
     public function testUpdateClientByObject(): void
@@ -42,7 +42,7 @@ class UpdateClientTest extends RequestTestCase
             new MockResponse((string) file_get_contents(__DIR__.'/create_client.json'))
         );
 
-        $client = new ClientResponse();
+        $client = new ClientData();
         $client->id = 1;
 
         $request = new UpdateClient($client, 'name', true, "address\nline2", 'EUR');

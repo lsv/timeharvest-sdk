@@ -19,9 +19,9 @@ class RetrieveClientTest extends RequestTestCase
         $response = $this->factory->request(new RetrieveClient(1));
         self::assertStringEndsWith('1', $this->getHttpRequestOptions()['url']);
 
-        self::assertNull($response['meta']);
-        self::assertSame(5735776, $response['data']->id);
-        self::assertSame('123 Industries', $response['data']->name);
+        self::assertNull($response->getMeta());
+        self::assertSame(5735776, $response->getData()->id);
+        self::assertSame('123 Industries', $response->getData()->name);
     }
 
     public function testGetClientWithObject(): void
@@ -30,7 +30,7 @@ class RetrieveClientTest extends RequestTestCase
             (string) file_get_contents(__DIR__.'/retrieve_client.json')
         ));
 
-        $client = new \Lsv\TimeharvestSdk\Response\Client\ClientResponse();
+        $client = new \Lsv\TimeharvestSdk\Response\Client\ClientData();
         $client->id = 1;
         $this->factory->request(new RetrieveClient($client));
         self::assertStringEndsWith('1', $this->getHttpRequestOptions()['url']);

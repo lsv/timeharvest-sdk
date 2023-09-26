@@ -27,7 +27,7 @@ class CreateClientTest extends RequestTestCase
         ], $this->getHttpRequestOptions()['array']);
         self::assertSame('POST', $this->getHttpRequestOptions()['method']);
         self::assertSame([], $this->getHttpRequestOptions()['query']);
-        self::assertNull($response['meta']);
-        self::assertSame(5737336, $response['data']->id);
+        self::assertNull($response->getMeta());
+        self::assertSame(5737336, $response->getData()->id);
     }
 }

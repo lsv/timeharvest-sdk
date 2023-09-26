@@ -207,28 +207,42 @@
   <summary class="text-delta">Table of contents</summary>
 <ul id="markdown-toc">
   <li><a href="#list-clients" id="markdown-toc-list-clients">List clients</a>    <ul>
-      <li><a href="#usage" id="markdown-toc-usage">Usage</a></li>
-      <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
-      <li><a href="#response" id="markdown-toc-response">Response</a></li>
+      <li><a href="#usage" id="markdown-toc-usage">Usage</a>        <ul>
+          <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
+          <li><a href="#response" id="markdown-toc-response">Response</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li><a href="#retrieve-client" id="markdown-toc-retrieve-client">Retrieve client</a>    <ul>
-      <li><a href="#parameters-1" id="markdown-toc-parameters-1">Parameters</a></li>
-      <li><a href="#response-1" id="markdown-toc-response-1">Response</a></li>
+      <li><a href="#usage-1" id="markdown-toc-usage-1">Usage</a>        <ul>
+          <li><a href="#parameters-1" id="markdown-toc-parameters-1">Parameters</a></li>
+          <li><a href="#response-1" id="markdown-toc-response-1">Response</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li><a href="#create-client" id="markdown-toc-create-client">Create client</a>    <ul>
-      <li><a href="#parameters-2" id="markdown-toc-parameters-2">Parameters</a></li>
-      <li><a href="#response-2" id="markdown-toc-response-2">Response</a></li>
+      <li><a href="#usage-2" id="markdown-toc-usage-2">Usage</a>        <ul>
+          <li><a href="#parameters-2" id="markdown-toc-parameters-2">Parameters</a></li>
+          <li><a href="#response-2" id="markdown-toc-response-2">Response</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li><a href="#update-client" id="markdown-toc-update-client">Update client</a>    <ul>
-      <li><a href="#parameters-3" id="markdown-toc-parameters-3">Parameters</a></li>
-      <li><a href="#response-3" id="markdown-toc-response-3">Response</a></li>
+      <li><a href="#usage-3" id="markdown-toc-usage-3">Usage</a>        <ul>
+          <li><a href="#parameters-3" id="markdown-toc-parameters-3">Parameters</a></li>
+          <li><a href="#response-3" id="markdown-toc-response-3">Response</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li><a href="#delete-client" id="markdown-toc-delete-client">Delete client</a>    <ul>
-      <li><a href="#parameters-4" id="markdown-toc-parameters-4">Parameters</a></li>
+      <li><a href="#usage-4" id="markdown-toc-usage-4">Usage</a>        <ul>
+          <li><a href="#parameters-4" id="markdown-toc-parameters-4">Parameters</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
@@ -237,15 +251,17 @@
 
 <p><a href="/timeharvest-sdk/docs/factory" class="btn btn-outline">See how to create a $factory</a></p>
 
-<h3 id="list-clients">List clients</h3>
+<h2 id="list-clients">List clients</h2>
 
 <p>Returns a list of your clients</p>
 
-<h4 id="usage">Usage</h4>
+<h3 id="usage">Usage</h3>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="nf">clients</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">listClients</span><span class="p">(</span><span class="nv">$isActive</span><span class="p">,</span> <span class="nv">$updatedSince</span><span class="p">,</span> <span class="nv">$page</span><span class="p">,</span> <span class="nv">$perPage</span><span class="p">);</span>
-<span class="k">foreach</span> <span class="p">(</span><span class="nv">$response</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$client</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$client</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\ClientResponse</span>
+<span class="nv">$meta</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getMeta</span><span class="p">();</span>
+<span class="nv">$meta</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\MetaResponse</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getData</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$client</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$client</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\ClientData</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -290,11 +306,13 @@
 
 <h4 id="response">Response</h4>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="p">[</span><span class="s1">'meta'</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\MetaResponse</span><span class="p">;</span>
-<span class="nv">$response</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span> <span class="k">array</span> <span class="n">of</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\ClientResponse</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getMeta</span><span class="p">()</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\MetaResponse</span><span class="p">;</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getData</span><span class="p">()</span> <span class="k">array</span> <span class="n">of</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\ClientData</span>
 </code></pre></div></div>
 
-<h3 id="retrieve-client">Retrieve client</h3>
+<h2 id="retrieve-client">Retrieve client</h2>
+
+<h3 id="usage-1">Usage</h3>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="nf">clients</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">getClient</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
 </code></pre></div></div>
@@ -314,7 +332,7 @@
     <tr>
       <td><code class="language-plaintext highlighter-rouge">$client</code></td>
       <td>true</td>
-      <td>int | <code class="language-plaintext highlighter-rouge">\Lsv\TimeharvestSdk\Response\Client\ClientResponse</code></td>
+      <td>int | <code class="language-plaintext highlighter-rouge">\Lsv\TimeharvestSdk\Response\Client\ClientInfoResponse</code></td>
       <td>The ID or a ClientResponse of the client needed to be retrieved</td>
     </tr>
   </tbody>
@@ -322,10 +340,12 @@
 
 <h4 id="response-1">Response</h4>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\ClientResponse</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getData</span><span class="p">()</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\ClientData</span>
 </code></pre></div></div>
 
-<h3 id="create-client">Create client</h3>
+<h2 id="create-client">Create client</h2>
+
+<h3 id="usage-2">Usage</h3>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="nf">clients</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">createClient</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$isActive</span><span class="p">,</span> <span class="nv">$address</span><span class="p">,</span> <span class="nv">$currency</span><span class="p">);</span>
 </code></pre></div></div>
@@ -371,10 +391,12 @@
 
 <h4 id="response-2">Response</h4>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\ClientResponse</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getData</span><span class="p">()</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\ClientData</span>
 </code></pre></div></div>
 
-<h3 id="update-client">Update client</h3>
+<h2 id="update-client">Update client</h2>
+
+<h3 id="usage-3">Usage</h3>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="nf">clients</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">updateClient</span><span class="p">(</span><span class="nv">$client</span><span class="p">,</span> <span class="nv">$name</span><span class="p">,</span> <span class="nv">$isActive</span><span class="p">,</span> <span class="nv">$address</span><span class="p">,</span> <span class="nv">$currency</span><span class="p">);</span>
 </code></pre></div></div>
@@ -394,7 +416,7 @@
     <tr>
       <td><code class="language-plaintext highlighter-rouge">$client</code></td>
       <td>true</td>
-      <td>int | <code class="language-plaintext highlighter-rouge">\Lsv\TimeharvestSdk\Response\Client\ClientResponse</code></td>
+      <td>int | <code class="language-plaintext highlighter-rouge">\Lsv\TimeharvestSdk\Response\Client\ClientInfoResponse</code></td>
       <td>The ID or a ClientResponse of the client needed to be updated</td>
     </tr>
     <tr>
@@ -426,10 +448,12 @@
 
 <h4 id="response-3">Response</h4>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\ClientResponse</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getData</span><span class="p">()</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\ClientData</span>
 </code></pre></div></div>
 
-<h3 id="delete-client">Delete client</h3>
+<h2 id="delete-client">Delete client</h2>
+
+<h3 id="usage-4">Usage</h3>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$factory</span><span class="o">-&gt;</span><span class="nf">clients</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">deleteClient</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
 </code></pre></div></div>
@@ -449,7 +473,7 @@
     <tr>
       <td><code class="language-plaintext highlighter-rouge">$client</code></td>
       <td>true</td>
-      <td>int | <code class="language-plaintext highlighter-rouge">\Lsv\TimeharvestSdk\Response\Client\ClientResponse</code></td>
+      <td>int | <code class="language-plaintext highlighter-rouge">\Lsv\TimeharvestSdk\Response\Client\ClientInfoResponse</code></td>
       <td>The ID or a ClientResponse of the client needed to be deleted</td>
     </tr>
   </tbody>

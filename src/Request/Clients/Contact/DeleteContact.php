@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Lsv\TimeharvestSdk\Request\Clients;
+namespace Lsv\TimeharvestSdk\Request\Clients\Contact;
 
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
-use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
+use Lsv\TimeharvestSdk\Response\Client\Contact\ContactData;
 use Lsv\TimeharvestSdk\Response\NullResponse;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-class DeleteClient extends AbstractRequest
+class DeleteContact extends AbstractRequest
 {
     public function __construct(
-        private readonly int|ClientInfoData $client
+        private readonly int|ContactData $contact
     ) {
     }
 
@@ -23,9 +23,9 @@ class DeleteClient extends AbstractRequest
 
     public function getUri(): string
     {
-        $clientId = $this->client instanceof ClientInfoData ? $this->client->id : $this->client;
+        $id = $this->contact instanceof ContactData ? $this->contact->id : $this->contact;
 
-        return 'clients/'.$clientId;
+        return '/contacts/'.$id;
     }
 
     public function parseResponse(ResponseInterface $response): NullResponse

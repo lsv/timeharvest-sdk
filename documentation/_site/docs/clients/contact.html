@@ -205,10 +205,345 @@
                 <h1>Contact</h1>
                 <details>
   <summary class="text-delta">Table of contents</summary>
+<ul id="markdown-toc">
+  <li><a href="#list-contacts" id="markdown-toc-list-contacts">List contacts</a>    <ul>
+      <li><a href="#usage" id="markdown-toc-usage">Usage</a>        <ul>
+          <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
+          <li><a href="#response" id="markdown-toc-response">Response</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#retrieve-contact" id="markdown-toc-retrieve-contact">Retrieve contact</a>    <ul>
+      <li><a href="#usage-1" id="markdown-toc-usage-1">Usage</a>        <ul>
+          <li><a href="#parameters-1" id="markdown-toc-parameters-1">Parameters</a></li>
+          <li><a href="#response-1" id="markdown-toc-response-1">Response</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#create-contact" id="markdown-toc-create-contact">Create contact</a>    <ul>
+      <li><a href="#usage-2" id="markdown-toc-usage-2">Usage</a>        <ul>
+          <li><a href="#parameters-2" id="markdown-toc-parameters-2">Parameters</a></li>
+          <li><a href="#response-2" id="markdown-toc-response-2">Response</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#update-contact" id="markdown-toc-update-contact">Update contact</a>    <ul>
+      <li><a href="#usage-3" id="markdown-toc-usage-3">Usage</a>        <ul>
+          <li><a href="#parameters-3" id="markdown-toc-parameters-3">Parameters</a></li>
+          <li><a href="#response-3" id="markdown-toc-response-3">Response</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#delete-contact" id="markdown-toc-delete-contact">Delete contact</a>    <ul>
+      <li><a href="#usage-4" id="markdown-toc-usage-4">Usage</a>        <ul>
+          <li><a href="#parameters-4" id="markdown-toc-parameters-4">Parameters</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
 
 </details>
 
-<p>xxx</p>
+<p><a href="/timeharvest-sdk/docs/factory" class="btn btn-outline">See how to create a $factory</a></p>
+
+<h2 id="list-contacts">List contacts</h2>
+
+<p>Returns a list of the contacts</p>
+
+<h3 id="usage">Usage</h3>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="nf">clients</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">contacts</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">listContacts</span><span class="p">(</span><span class="nv">$clientId</span><span class="p">,</span> <span class="nv">$updatedSince</span><span class="p">,</span> <span class="nv">$page</span><span class="p">,</span> <span class="nv">$perPage</span><span class="p">);</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getMeta</span><span class="p">()</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\MetaResponse</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getData</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$client</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$client</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\Contact\ContactData</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="parameters">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$clientId</code></td>
+      <td>false</td>
+      <td>int | <code class="language-plaintext highlighter-rouge">ClientInfoResponse</code></td>
+      <td>Select only contacts that belongs to this client</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$updatedSince</code></td>
+      <td>false</td>
+      <td>DateTimeInterface</td>
+      <td>Only select contacts updated after this date</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$page</code></td>
+      <td>false</td>
+      <td>int</td>
+      <td>Page number</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$perPage</code></td>
+      <td>false</td>
+      <td>int</td>
+      <td>How many per page</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="response">Response</h4>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getMeta</span><span class="p">()</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\MetaResponse</span><span class="p">;</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getData</span><span class="p">()</span> <span class="k">array</span> <span class="n">of</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\Contact\ContactData</span>
+</code></pre></div></div>
+
+<h2 id="retrieve-contact">Retrieve contact</h2>
+
+<h3 id="usage-1">Usage</h3>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="nf">clients</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">contacts</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">getContact</span><span class="p">(</span><span class="nv">$contact</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="parameters-1">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$contact</code></td>
+      <td>true</td>
+      <td>int | <code class="language-plaintext highlighter-rouge">\Lsv\TimeharvestSdk\Response\Client\Contact\ContactData</code></td>
+      <td>The ID or a ContactResponse of the contact needed to be retrieved</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="response-1">Response</h4>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getData</span><span class="p">()</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\Contact\ContactData</span>
+</code></pre></div></div>
+
+<h2 id="create-contact">Create contact</h2>
+
+<h3 id="usage-2">Usage</h3>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="nf">clients</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">contacts</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">createContact</span><span class="p">(</span>
+    <span class="nv">$clientId</span><span class="p">,</span>
+    <span class="nv">$firstName</span><span class="p">,</span>
+    <span class="nv">$lastName</span><span class="p">,</span>
+    <span class="nv">$title</span><span class="p">,</span>
+    <span class="nv">$email</span><span class="p">,</span>
+    <span class="nv">$phoneOffice</span><span class="p">,</span>
+    <span class="nv">$phoneMobile</span><span class="p">,</span>
+    <span class="nv">$fax</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="parameters-2">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$clientId</code></td>
+      <td>true</td>
+      <td>int | <code class="language-plaintext highlighter-rouge">\Lsv\TimeharvestSdk\Response\Client\ClientInfoResponse</code></td>
+      <td>The ID or a ClientResponse of the client the contact needs to be associated with</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$firstName</code></td>
+      <td>true</td>
+      <td>string</td>
+      <td>First name of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$lastName</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Last name of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$title</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Title of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$email</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Email of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$phoneOffice</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Office phone of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$phoneMobile</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Mobile phone of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$fax</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Fax of the contact</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="response-2">Response</h4>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getData</span><span class="p">()</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\Contact\ContactData</span>
+</code></pre></div></div>
+
+<h2 id="update-contact">Update contact</h2>
+
+<h3 id="usage-3">Usage</h3>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="nf">clients</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">contacts</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">updateContact</span><span class="p">(</span>
+    <span class="nv">$contact</span><span class="p">,</span>
+    <span class="nv">$clientId</span><span class="p">,</span>
+    <span class="nv">$firstName</span><span class="p">,</span>
+    <span class="nv">$lastName</span><span class="p">,</span>
+    <span class="nv">$title</span><span class="p">,</span>
+    <span class="nv">$email</span><span class="p">,</span>
+    <span class="nv">$phoneOffice</span><span class="p">,</span>
+    <span class="nv">$phoneMobile</span><span class="p">,</span>
+    <span class="nv">$fax</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="parameters-3">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$contact</code></td>
+      <td>true</td>
+      <td>int | <code class="language-plaintext highlighter-rouge">\Lsv\TimeharvestSdk\Response\Client\Contact\ContactData</code></td>
+      <td>The ID or a ContactResponse of the contact needed to be updated</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$clientId</code></td>
+      <td>false</td>
+      <td>int | <code class="language-plaintext highlighter-rouge">\Lsv\TimeharvestSdk\Response\Client\ClientInfoResponse</code></td>
+      <td>The ID or a ClientResponse of the client the contact needs to be associated with</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$firstName</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>First name of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$lastName</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Last name of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$title</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Title of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$email</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Email of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$phoneOffice</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Office phone of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$phoneMobile</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Mobile phone of the contact</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$fax</code></td>
+      <td>false</td>
+      <td>string</td>
+      <td>Fax of the contact</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="response-3">Response</h4>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getData</span><span class="p">()</span> <span class="k">instanceof</span> <span class="nc">\Lsv\TimeharvestSdk\Response\Client\Contact\ContactData</span>
+</code></pre></div></div>
+
+<h2 id="delete-contact">Delete contact</h2>
+
+<h3 id="usage-4">Usage</h3>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$factory</span><span class="o">-&gt;</span><span class="nf">clients</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">contacts</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">deleteContact</span><span class="p">(</span><span class="nv">$contact</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="parameters-4">Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$contact</code></td>
+      <td>true</td>
+      <td>int | <code class="language-plaintext highlighter-rouge">\Lsv\TimeharvestSdk\Response\Client\Contact\ContactData</code></td>
+      <td>The ID or a ContactResponse of the contact needed to be deleted</td>
+    </tr>
+  </tbody>
+</table>
 
 
                 

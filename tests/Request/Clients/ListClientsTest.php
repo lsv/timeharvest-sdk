@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Lsv\TimeharvestSdkTest\Request\Clients;
 
 use Lsv\TimeharvestSdk\Request\Clients\ListClients;
-use Lsv\TimeharvestSdk\Response\Client\ClientResponse;
+use Lsv\TimeharvestSdk\Response\Client\ClientData;
 use Lsv\TimeharvestSdkTest\Request\RequestTestCase;
+use Symfony\Component\HttpClient\Exception\ClientException;
+use Symfony\Component\HttpClient\Exception\ServerException;
 use Symfony\Component\HttpClient\Response\MockResponse;
 
 class ListClientsTest extends RequestTestCase
@@ -26,7 +28,7 @@ class ListClientsTest extends RequestTestCase
             $this->getHttpRequestOptions()['query']
         );
 
-        $meta = $response['meta'];
+        $meta = $response->getMeta();
         self::assertNotNull($meta);
 
         self::assertSame(2, $meta->totalEntries);
@@ -40,9 +42,9 @@ class ListClientsTest extends RequestTestCase
         self::assertNull($meta->links['previous']);
         self::assertSame('https://api.harvestapp.com/v2/clients?page=1&per_page=2000', $meta->links['last']);
 
-        self::assertCount(2, $response['data']);
-        $data = $response['data'][0];
-        self::assertInstanceOf(ClientResponse::class, $data);
+        self::assertCount(2, $response->getData());
+        $data = $response->getData()[0];
+        self::assertInstanceOf(ClientData::class, $data);
         self::assertSame('123 Industries', $data->name);
         self::assertSame('0a39d3e33c8058cf7c3f8097d854c64e', $data->statementKey);
         self::assertStringContainsString('Anytown', $data->address);
@@ -52,38 +54,27 @@ class ListClientsTest extends RequestTestCase
         self::assertSame('2017-06-26', $data->updatedAt->format('Y-m-d'));
     }
 
-    public function testNoAuthorizationResponse(): void
+    public static function httpErrorCodesResponseProvider(): \Generator
     {
-        $this->httpClient->setResponseFactory(
-            new MockResponse('', ['http_code' => 403])
-        );
+        yield [403];
+        yield [404];
+        yield [422];
+        yield [429];
+        yield [500, ServerException::class];
     }
 
-    public function testNotFoundResponse(): void
+    /**
+     * @dataProvider httpErrorCodesResponseProvider
+     *
+     * @param class-string<\Throwable> $exception
+     */
+    public function testHttpErrorCodesResponse(int $code, string $exception = ClientException::class): void
     {
-        $this->httpClient->setResponseFactory(
-            new MockResponse('', ['http_code' => 404])
-        );
-    }
+        $this->expectException($exception);
 
-    public function testErrorInProcessingResponse(): void
-    {
         $this->httpClient->setResponseFactory(
-            new MockResponse('', ['http_code' => 422])
+            new MockResponse('', ['http_code' => $code])
         );
-    }
-
-    public function testThrottleResponse(): void
-    {
-        $this->httpClient->setResponseFactory(
-            new MockResponse('', ['http_code' => 429])
-        );
-    }
-
-    public function testServerErrorResponse(): void
-    {
-        $this->httpClient->setResponseFactory(
-            new MockResponse('', ['http_code' => 500])
-        );
+        $this->factory->clients()->listClients();
     }
 }

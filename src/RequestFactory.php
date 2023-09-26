@@ -6,7 +6,6 @@ namespace Lsv\TimeharvestSdk;
 
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Request\ClientsFactory;
-use Lsv\TimeharvestSdk\Response\MetaResponse;
 
 class RequestFactory
 {
@@ -19,13 +18,10 @@ class RequestFactory
 
     public function clients(): ClientsFactory
     {
-        return new ClientsFactory();
+        return new ClientsFactory($this);
     }
 
-    /**
-     * @return array{meta: MetaResponse|null, data: mixed}
-     */
-    public function request(AbstractRequest $request): array
+    public function request(AbstractRequest $request): mixed
     {
         $this->httpResponse = $this->client->getClient()->request(
             $request->getMethod(),
