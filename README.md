@@ -12,44 +12,20 @@ PHP SDK for [Timeharvest](https://help.getharvest.com/api-v2/)
 composer require lsv/timeharvest-sdk
 ```
 
-### Usage
+### Example usage
 
-### TODO
+```php
+$factory = new \Lsv\TimeharvestSdk\RequestFactory(
+    new \Lsv\TimeharvestSdk\TimeharvestClient($accessToken,$accountId)
+);
 
-- Clients
-  - [x] Client
-  - [ ] Contacts
-- [ ] Company
-- Invoices
-  - [ ] Messages
-  - [ ] Payments
-  - [ ] Invoices
-  - [ ] Item categories
-- Estimates
-  - [ ] Messages
-  - [ ] Estimates
-  - [ ] Item categories
-- Expenses
-  - [ ] Expenses
-  - [ ] Categories
-- [ ] Tasks
-- [ ] Time Entries
-- Projects
-  - [ ] User assignments
-  - [ ] Task assignments
-  - [ ] Projects
-- [ ] Roles
-- Users
-  - [ ] Teammates
-  - [ ] Billable rates
-  - [ ] Cost rates
-  - [ ] Project assignments
-  - [ ] Users
-- Reports
-  - [ ] Expenses
-  - [ ] UnInvoiced
-  - [ ] Time
-  - [ ] Project budget
+$response = $factory->clients()->listClients($isActive, $updatedSince, $page, $perPage);
+foreach ($response['data'] as $client) {
+    // $client instanceof \Lsv\TimeharvestSdk\Response\Client\ClientResponse
+}
+```
+
+### [Documentation](https://lsv.github.io/timeharvest-sdk/)
 
 ### License
 The MIT License (MIT)
