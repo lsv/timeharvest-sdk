@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Response;
 
-interface Response
+interface ResponseInterface
 {
     public function getMeta(): null|MetaResponse;
 

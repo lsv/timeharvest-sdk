@@ -37,6 +37,6 @@ $factory = new \Lsv\TimeharvestSdk\RequestFactory($client);
 
 #### Parameters
 
-| Parameter    | Required | Type   | Description                                                                              |
-|--------------|----------|--------|------------------------------------------------------------------------------------------|
-| `$client`    | true     | string | The [TimeharvestClient](#client) |
+| Parameter | Required | Type   | Description                      |
+|-----------|----------|--------|----------------------------------|
+| `$client` | true     | string | The [TimeharvestClient](#client) |

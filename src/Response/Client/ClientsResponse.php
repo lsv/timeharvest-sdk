@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Lsv\TimeharvestSdk\Response\Client;
 
 use Lsv\TimeharvestSdk\Response\MetaResponse;
-use Lsv\TimeharvestSdk\Response\Response;
+use Lsv\TimeharvestSdk\Response\ResponseInterface;
 
-readonly class ClientsResponse implements Response
+readonly class ClientsResponse implements ResponseInterface
 {
     /**
      * @param ClientData[] $clients

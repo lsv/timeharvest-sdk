@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Response\Client;
 
-use Lsv\TimeharvestSdk\Response\Response;
+use Lsv\TimeharvestSdk\Response\ResponseInterface;
 
-readonly class ClientResponse implements Response
+readonly class ClientResponse implements ResponseInterface
 {
     public function __construct(private readonly ClientData $data)
     {

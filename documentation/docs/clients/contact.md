@@ -153,3 +153,4 @@ $response->getData() instanceof {{page.dataResponse}}
 | Parameter  | Required | Type                           | Description                                                     |
 |------------|----------|--------------------------------|-----------------------------------------------------------------|
 | `$contact` | true     | int \| `{{page.dataResponse}}` | The ID or a ContactResponse of the contact needed to be deleted |
+

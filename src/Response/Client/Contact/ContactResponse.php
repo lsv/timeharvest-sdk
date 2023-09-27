@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Response\Client\Contact;
 
-use Lsv\TimeharvestSdk\Response\Response;
+use Lsv\TimeharvestSdk\Response\ResponseInterface;
 
-readonly class ContactResponse implements Response
+readonly class ContactResponse implements ResponseInterface
 {
     public function __construct(private ContactData $data)
     {

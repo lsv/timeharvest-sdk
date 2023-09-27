@@ -127,3 +127,4 @@ $response->getData() instanceof {{page.dataResponse}}
 | Parameter | Required | Type                                                            | Description                                                   |
 |-----------|----------|-----------------------------------------------------------------|---------------------------------------------------------------|
 | `$client` | true     | int \| `\Lsv\TimeharvestSdk\Response\Client\ClientInfoResponse` | The ID or a ClientResponse of the client needed to be deleted |
+

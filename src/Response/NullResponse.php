@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Response;
 
-class NullResponse implements Response
+class NullResponse implements ResponseInterface
 {
     public function getMeta(): null
     {

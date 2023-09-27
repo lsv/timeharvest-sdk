@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Lsv\TimeharvestSdk\Response\Client\Contact;
 
 use Lsv\TimeharvestSdk\Response\MetaResponse;
-use Lsv\TimeharvestSdk\Response\Response;
+use Lsv\TimeharvestSdk\Response\ResponseInterface;
 
-readonly class ContactsResponse implements Response
+readonly class ContactsResponse implements ResponseInterface
 {
     /**
      * @param ContactData[] $contacts
