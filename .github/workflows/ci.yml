@@ -50,6 +50,8 @@ jobs:
 
       - name: PHP Infection
         run: vendor/bin/infection --skip-initial-tests --threads=64 --coverage=.build/coverage
+        env:
+          STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
