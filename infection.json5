@@ -9,6 +9,12 @@
         "text": ".build/infection/infection.log",
         "html": ".build/infection/infection.html",
         "summary": ".build/infection/summary.log",
-        "json": ".build/infection/log.json"
+        "json": ".build/infection/infection-log.json",
+        "perMutator": ".build/infection/per-mutator.md",
+        "github": true,
+        "stryker": {
+            "report": "master"
+        },
+        "summaryJson": ".build/infection/summary.json"
     }
 }

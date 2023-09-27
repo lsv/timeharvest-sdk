@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Lsv\TimeharvestSdk\Request\Clients;
 
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
-use Lsv\TimeharvestSdk\Response\Client\ClientResponse;
+use Lsv\TimeharvestSdk\Response\Client\ClientData;
+use Lsv\TimeharvestSdk\Response\Client\ClientsResponse;
 use Lsv\TimeharvestSdk\Response\MetaResponse;
 use Symfony\Contracts\HttpClient\ResponseInterface as HttpResponseInterface;
 
@@ -24,18 +25,12 @@ class ListClients extends AbstractRequest
         return 'clients';
     }
 
-    /**
-     * @return array{meta: MetaResponse, data: ClientResponse[]}
-     */
-    public function parseResponse(HttpResponseInterface $response): array
+    public function parseResponse(HttpResponseInterface $response): ClientsResponse
     {
         $data = $response->toArray();
         $meta = $this->deserializeData($data, MetaResponse::class);
-        $clients = $this->deserializeData($data['clients'], ClientResponse::class.'[]');
+        $clients = $this->deserializeData($data['clients'], ClientData::class.'[]');
 
-        return [
-            'meta' => $meta,
-            'data' => $clients,
-        ];
+        return new ClientsResponse($meta, $clients);
     }
 }

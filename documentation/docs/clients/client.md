@@ -2,6 +2,10 @@
 layout: sub
 title: Client
 parent: Clients
+dataResponse: \Lsv\TimeharvestSdk\Response\Client\ClientData
+singleResponse: \Lsv\TimeharvestSdk\Response\Client\ClientResponse
+multiResponse: \Lsv\TimeharvestSdk\Response\Client\ClientsResponse
+factory: $factory->clients()
 ---
 
 <details markdown="block">
@@ -12,16 +16,18 @@ parent: Clients
 
 [See how to create a $factory]({% link docs/factory/factory.md %}){: .btn .btn-outline }
 
-### List clients
+## List clients
 
 Returns a list of your clients
 
-#### Usage
+### Usage
 
 ```php
-$response = $factory->clients()->listClients($isActive, $updatedSince, $page, $perPage);
-foreach ($response['data'] as $client) {
-    $client instanceof \Lsv\TimeharvestSdk\Response\Client\ClientResponse
+$response = {{page.factory}}->listClients($isActive, $updatedSince, $page, $perPage);
+$meta = $response->getMeta();
+$meta instanceof \Lsv\TimeharvestSdk\Response\MetaResponse
+foreach ($response->getData() as $client) {
+    $client instanceof {{page.dataResponse}}
 }
 ```
 
@@ -37,11 +43,13 @@ foreach ($response['data'] as $client) {
 #### Response
 
 ```php
-$response['meta'] instanceof \Lsv\TimeharvestSdk\Response\MetaResponse;
-$response['data'] array of \Lsv\TimeharvestSdk\Response\Client\ClientResponse
+$response->getMeta() instanceof \Lsv\TimeharvestSdk\Response\MetaResponse;
+$response->getData() array of {{page.dataResponse}}
 ```
 
-### Retrieve client
+## Retrieve client
+
+### Usage
 
 ```php
 $response = $factory->clients()->getClient($client);
@@ -49,20 +57,22 @@ $response = $factory->clients()->getClient($client);
 
 #### Parameters
 
-| Parameter | Required | Type                                                        | Description                                                     |
-|-----------|----------|-------------------------------------------------------------|-----------------------------------------------------------------|
-| `$client` | true     | int \| `\Lsv\TimeharvestSdk\Response\Client\ClientResponse` | The ID or a ClientResponse of the client needed to be retrieved |
+| Parameter | Required | Type                                                            | Description                                                     |
+|-----------|----------|-----------------------------------------------------------------|-----------------------------------------------------------------|
+| `$client` | true     | int \| `\Lsv\TimeharvestSdk\Response\Client\ClientInfoResponse` | The ID or a ClientResponse of the client needed to be retrieved |
 
 #### Response
 
 ```php
-$response['data'] instanceof \Lsv\TimeharvestSdk\Response\Client\ClientResponse
+$response->getData() instanceof {{page.dataResponse}}
 ```
 
-### Create client
+## Create client
+
+### Usage
 
 ```php
-$response = $factory->clients()->createClient($name, $isActive, $address, $currency);
+$response = {{page.factory}}->createClient($name, $isActive, $address, $currency);
 ```
 
 #### Parameters
@@ -77,39 +87,43 @@ $response = $factory->clients()->createClient($name, $isActive, $address, $curre
 #### Response
 
 ```php
-$response['data'] instanceof \Lsv\TimeharvestSdk\Response\Client\ClientResponse
+$response->getData() instanceof {{page.dataResponse}}
 ```
 
-### Update client
+## Update client
+
+### Usage
 
 ```php
-$response = $factory->clients()->updateClient($client, $name, $isActive, $address, $currency);
+$response = {{page.factory}}->updateClient($client, $name, $isActive, $address, $currency);
 ```
 
 #### Parameters
 
-| Parameter   | Required | Type                                                        | Description                                                   |
-|-------------|----------|-------------------------------------------------------------|---------------------------------------------------------------|
-| `$client`   | true     | int \| `\Lsv\TimeharvestSdk\Response\Client\ClientResponse` | The ID or a ClientResponse of the client needed to be updated |
-| `$name`     | false    | string                                                      | Name of the client                                            |
-| `$isActive` | false    | bool                                                        | Is the client active                                          |
-| `$address`  | false    | string                                                      | Address of the client                                         |
-| `$currency` | false    | string                                                      | Currency for the client                                       |
+| Parameter   | Required | Type                                                            | Description                                                   |
+|-------------|----------|-----------------------------------------------------------------|---------------------------------------------------------------|
+| `$client`   | true     | int \| `\Lsv\TimeharvestSdk\Response\Client\ClientInfoResponse` | The ID or a ClientResponse of the client needed to be updated |
+| `$name`     | false    | string                                                          | Name of the client                                            |
+| `$isActive` | false    | bool                                                            | Is the client active                                          |
+| `$address`  | false    | string                                                          | Address of the client                                         |
+| `$currency` | false    | string                                                          | Currency for the client                                       |
 
 #### Response
 
 ```php
-$response['data'] instanceof \Lsv\TimeharvestSdk\Response\Client\ClientResponse
+$response->getData() instanceof {{page.dataResponse}}
 ```
 
-### Delete client
+## Delete client
+
+### Usage
 
 ```php
-$factory->clients()->deleteClient($client);
+{{page.factory}}->deleteClient($client);
 ```
 
 #### Parameters
 
-| Parameter | Required | Type                                                        | Description                                                   |
-|-----------|----------|-------------------------------------------------------------|---------------------------------------------------------------|
-| `$client` | true     | int \| `\Lsv\TimeharvestSdk\Response\Client\ClientResponse` | The ID or a ClientResponse of the client needed to be deleted |
+| Parameter | Required | Type                                                            | Description                                                   |
+|-----------|----------|-----------------------------------------------------------------|---------------------------------------------------------------|
+| `$client` | true     | int \| `\Lsv\TimeharvestSdk\Response\Client\ClientInfoResponse` | The ID or a ClientResponse of the client needed to be deleted |

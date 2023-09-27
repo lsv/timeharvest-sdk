@@ -17,15 +17,15 @@ class DeleteClientTest extends RequestTestCase
         $response = $this->factory->request(new DeleteClient(1));
         self::assertStringEndsWith('1', $this->getHttpRequestOptions()['url']);
 
-        self::assertNull($response['meta']);
-        self::assertNull($response['data']);
+        self::assertNull($response->getMeta());
+        self::assertNull($response->getData());
     }
 
     public function testDeleteClientWithObject(): void
     {
         $this->httpClient->setResponseFactory(new MockResponse());
 
-        $client = new \Lsv\TimeharvestSdk\Response\Client\ClientResponse();
+        $client = new \Lsv\TimeharvestSdk\Response\Client\ClientData();
         $client->id = 1;
         $this->factory->request(new DeleteClient($client));
         self::assertStringEndsWith('1', $this->getHttpRequestOptions()['url']);

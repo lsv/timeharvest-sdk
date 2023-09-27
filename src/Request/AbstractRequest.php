@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Request;
 
-use Lsv\TimeharvestSdk\Response\MetaResponse;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -42,8 +41,13 @@ abstract class AbstractRequest
         $properties = $ref->getProperties(\ReflectionProperty::IS_PUBLIC);
         $values = new \stdClass();
         foreach ($properties as $property) {
-            $values->{$property->getName()} = $property->getValue($this);
+            if (null === ($value = $property->getValue($this))) {
+                continue;
+            }
+
+            $values->{$property->getName()} = $value;
         }
+        $this->preQuery($values);
 
         $data = $this->getSerializer()->serialize($values, 'json');
 
@@ -51,10 +55,12 @@ abstract class AbstractRequest
         return json_decode($data, true, flags: JSON_THROW_ON_ERROR);
     }
 
-    /**
-     * @return array{meta: MetaResponse|null, data: mixed}
-     */
-    abstract public function parseResponse(ResponseInterface $response): array;
+    /** @infection-ignore-all */
+    protected function preQuery(\stdClass $values): void
+    {
+    }
+
+    abstract public function parseResponse(ResponseInterface $response): mixed;
 
     private function getSerializer(): SerializerInterface
     {

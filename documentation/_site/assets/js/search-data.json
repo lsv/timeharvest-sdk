@@ -1,39 +1,109 @@
 {"0": {
     "doc": "Client",
+    "title": "List clients",
+    "content": "Returns a list of your clients . Usage . $response = $factory-&gt;clients()-&gt;listClients($isActive, $updatedSince, $page, $perPage); $meta = $response-&gt;getMeta(); $meta instanceof \\Lsv\\TimeharvestSdk\\Response\\MetaResponse foreach ($response-&gt;getData() as $client) { $client instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientData } . Parameters . | Parameter | Required | Type | Description | . | $isActive | false | bool | Select only active or inactive clients | . | $updatedSince | false | DateTimeInterface | Only select clients updated after this date | . | $page | false | int | Page number | . | $perPage | false | int | How many per page | . Response . $response-&gt;getMeta() instanceof \\Lsv\\TimeharvestSdk\\Response\\MetaResponse; $response-&gt;getData() array of \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientData . ",
+    "url": "/timeharvest-sdk/docs/clients/client.html#list-clients",
+    
+    "relUrl": "/docs/clients/client.html#list-clients"
+  },"1": {
+    "doc": "Client",
+    "title": "Retrieve client",
+    "content": "Usage . $response = $factory-&gt;clients()-&gt;getClient($client); . Parameters . | Parameter | Required | Type | Description | . | $client | true | int | \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientInfoResponse | The ID or a ClientResponse of the client needed to be retrieved | . Response . $response-&gt;getData() instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientData . ",
+    "url": "/timeharvest-sdk/docs/clients/client.html#retrieve-client",
+    
+    "relUrl": "/docs/clients/client.html#retrieve-client"
+  },"2": {
+    "doc": "Client",
+    "title": "Create client",
+    "content": "Usage . $response = $factory-&gt;clients()-&gt;createClient($name, $isActive, $address, $currency); . Parameters . | Parameter | Required | Type | Description | . | $name | true | string | Name of the client | . | $isActive | false | bool | Is the client active | . | $address | false | string | Address of the client | . | $currency | false | string | Currency for the client | . Response . $response-&gt;getData() instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientData . ",
+    "url": "/timeharvest-sdk/docs/clients/client.html#create-client",
+    
+    "relUrl": "/docs/clients/client.html#create-client"
+  },"3": {
+    "doc": "Client",
+    "title": "Update client",
+    "content": "Usage . $response = $factory-&gt;clients()-&gt;updateClient($client, $name, $isActive, $address, $currency); . Parameters . | Parameter | Required | Type | Description | . | $client | true | int | \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientInfoResponse | The ID or a ClientResponse of the client needed to be updated | . | $name | false | string | Name of the client | . | $isActive | false | bool | Is the client active | . | $address | false | string | Address of the client | . | $currency | false | string | Currency for the client | . Response . $response-&gt;getData() instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientData . ",
+    "url": "/timeharvest-sdk/docs/clients/client.html#update-client",
+    
+    "relUrl": "/docs/clients/client.html#update-client"
+  },"4": {
+    "doc": "Client",
+    "title": "Delete client",
+    "content": "Usage . $factory-&gt;clients()-&gt;deleteClient($client); . Parameters . | Parameter | Required | Type | Description | . | $client | true | int | \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientInfoResponse | The ID or a ClientResponse of the client needed to be deleted | . ",
+    "url": "/timeharvest-sdk/docs/clients/client.html#delete-client",
+    
+    "relUrl": "/docs/clients/client.html#delete-client"
+  },"5": {
+    "doc": "Client",
     "title": "Client",
-    "content": ". | List clients . | Usage | Parameters | Response | . | Retrieve client . | Parameters | Response | . | Create client . | Parameters | Response | . | Update client . | Parameters | Response | . | Delete client . | Parameters | . | . See how to create a $factory . List clients . Returns a list of your clients . Usage . $response = $factory-&gt;clients()-&gt;listClients($isActive, $updatedSince, $page, $perPage); foreach ($response['data'] as $client) { $client instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientResponse } . Parameters . | Parameter | Required | Type | Description | . | $isActive | false | bool | Select only active or inactive clients | . | $updatedSince | false | DateTimeInterface | Only select clients updated after this date | . | $page | false | int | Page number | . | $perPage | false | int | How many per page | . Response . $response['meta'] instanceof \\Lsv\\TimeharvestSdk\\Response\\MetaResponse; $response['data'] array of \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientResponse . Retrieve client . $response = $factory-&gt;clients()-&gt;getClient($client); . Parameters . | Parameter | Required | Type | Description | . | $client | true | int | \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientResponse | The ID or a ClientResponse of the client needed to be retrieved | . Response . $response['data'] instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientResponse . Create client . $response = $factory-&gt;clients()-&gt;createClient($name, $isActive, $address, $currency); . Parameters . | Parameter | Required | Type | Description | . | $name | true | string | Name of the client | . | $isActive | false | bool | Is the client active | . | $address | false | string | Address of the client | . | $currency | false | string | Currency for the client | . Response . $response['data'] instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientResponse . Update client . $response = $factory-&gt;clients()-&gt;updateClient($client, $name, $isActive, $address, $currency); . Parameters . | Parameter | Required | Type | Description | . | $client | true | int | \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientResponse | The ID or a ClientResponse of the client needed to be updated | . | $name | false | string | Name of the client | . | $isActive | false | bool | Is the client active | . | $address | false | string | Address of the client | . | $currency | false | string | Currency for the client | . Response . $response['data'] instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientResponse . Delete client . $factory-&gt;clients()-&gt;deleteClient($client); . Parameters . | Parameter | Required | Type | Description | . | $client | true | int | \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientResponse | The ID or a ClientResponse of the client needed to be deleted | . ",
+    "content": ". | List clients . | Usage . | Parameters | Response | . | . | Retrieve client . | Usage . | Parameters | Response | . | . | Create client . | Usage . | Parameters | Response | . | . | Update client . | Usage . | Parameters | Response | . | . | Delete client . | Usage . | Parameters | . | . | . See how to create a $factory . ",
     "url": "/timeharvest-sdk/docs/clients/client.html",
     
     "relUrl": "/docs/clients/client.html"
-  },"1": {
+  },"6": {
     "doc": "Clients",
     "title": "Clients",
     "content": " ",
     "url": "/timeharvest-sdk/docs/clients",
     
     "relUrl": "/docs/clients"
-  },"2": {
+  },"7": {
+    "doc": "Contact",
+    "title": "List contacts",
+    "content": "Returns a list of the contacts . Usage . $response = $factory-&gt;clients()-&gt;contacts()-&gt;listContacts($clientId, $updatedSince, $page, $perPage); $response-&gt;getMeta() instanceof \\Lsv\\TimeharvestSdk\\Response\\MetaResponse foreach ($response-&gt;getData() as $client) { $client instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\Contact\\ContactData } . Parameters . | Parameter | Required | Type | Description | . | $clientId | false | int | ClientInfoResponse | Select only contacts that belongs to this client | . | $updatedSince | false | DateTimeInterface | Only select contacts updated after this date | . | $page | false | int | Page number | . | $perPage | false | int | How many per page | . Response . $response-&gt;getMeta() instanceof \\Lsv\\TimeharvestSdk\\Response\\MetaResponse; $response-&gt;getData() array of \\Lsv\\TimeharvestSdk\\Response\\Client\\Contact\\ContactData . ",
+    "url": "/timeharvest-sdk/docs/clients/contact.html#list-contacts",
+    
+    "relUrl": "/docs/clients/contact.html#list-contacts"
+  },"8": {
+    "doc": "Contact",
+    "title": "Retrieve contact",
+    "content": "Usage . $response = $factory-&gt;clients()-&gt;contacts()-&gt;getContact($contact); . Parameters . | Parameter | Required | Type | Description | . | $contact | true | int | \\Lsv\\TimeharvestSdk\\Response\\Client\\Contact\\ContactData | The ID or a ContactResponse of the contact needed to be retrieved | . Response . $response-&gt;getData() instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\Contact\\ContactData . ",
+    "url": "/timeharvest-sdk/docs/clients/contact.html#retrieve-contact",
+    
+    "relUrl": "/docs/clients/contact.html#retrieve-contact"
+  },"9": {
+    "doc": "Contact",
+    "title": "Create contact",
+    "content": "Usage . $response = $factory-&gt;clients()-&gt;contacts()-&gt;createContact( $clientId, $firstName, $lastName, $title, $email, $phoneOffice, $phoneMobile, $fax ); . Parameters . | Parameter | Required | Type | Description | . | $clientId | true | int | \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientInfoResponse | The ID or a ClientResponse of the client the contact needs to be associated with | . | $firstName | true | string | First name of the contact | . | $lastName | false | string | Last name of the contact | . | $title | false | string | Title of the contact | . | $email | false | string | Email of the contact | . | $phoneOffice | false | string | Office phone of the contact | . | $phoneMobile | false | string | Mobile phone of the contact | . | $fax | false | string | Fax of the contact | . Response . $response-&gt;getData() instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\Contact\\ContactData . ",
+    "url": "/timeharvest-sdk/docs/clients/contact.html#create-contact",
+    
+    "relUrl": "/docs/clients/contact.html#create-contact"
+  },"10": {
+    "doc": "Contact",
+    "title": "Update contact",
+    "content": "Usage . $response = $factory-&gt;clients()-&gt;contacts()-&gt;updateContact( $contact, $clientId, $firstName, $lastName, $title, $email, $phoneOffice, $phoneMobile, $fax ); . Parameters . | Parameter | Required | Type | Description | . | $contact | true | int | \\Lsv\\TimeharvestSdk\\Response\\Client\\Contact\\ContactData | The ID or a ContactResponse of the contact needed to be updated | . | $clientId | false | int | \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientInfoResponse | The ID or a ClientResponse of the client the contact needs to be associated with | . | $firstName | false | string | First name of the contact | . | $lastName | false | string | Last name of the contact | . | $title | false | string | Title of the contact | . | $email | false | string | Email of the contact | . | $phoneOffice | false | string | Office phone of the contact | . | $phoneMobile | false | string | Mobile phone of the contact | . | $fax | false | string | Fax of the contact | . Response . $response-&gt;getData() instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\Contact\\ContactData . ",
+    "url": "/timeharvest-sdk/docs/clients/contact.html#update-contact",
+    
+    "relUrl": "/docs/clients/contact.html#update-contact"
+  },"11": {
+    "doc": "Contact",
+    "title": "Delete contact",
+    "content": "Usage . $factory-&gt;clients()-&gt;contacts()-&gt;deleteContact($contact); . Parameters . | Parameter | Required | Type | Description | . | $contact | true | int | \\Lsv\\TimeharvestSdk\\Response\\Client\\Contact\\ContactData | The ID or a ContactResponse of the contact needed to be deleted | . ",
+    "url": "/timeharvest-sdk/docs/clients/contact.html#delete-contact",
+    
+    "relUrl": "/docs/clients/contact.html#delete-contact"
+  },"12": {
     "doc": "Contact",
     "title": "Contact",
-    "content": "xxx . ",
+    "content": ". | List contacts . | Usage . | Parameters | Response | . | . | Retrieve contact . | Usage . | Parameters | Response | . | . | Create contact . | Usage . | Parameters | Response | . | . | Update contact . | Usage . | Parameters | Response | . | . | Delete contact . | Usage . | Parameters | . | . | . See how to create a $factory . ",
     "url": "/timeharvest-sdk/docs/clients/contact.html",
     
     "relUrl": "/docs/clients/contact.html"
-  },"3": {
+  },"13": {
     "doc": "Factory",
     "title": "Factory",
     "content": ". | Client . | Parameters | . | Factory . | Parameters | . | . Client . $client = new \\Lsv\\TimeharvestSdk\\TimeharvestClient($accessToken,$accountId); . Parameters . | Parameter | Required | Type | Description | . | $accessToken | true | string | Access token | . | $accountId | true | string | Account ID | . Create a new set of tokens at https://id.getharvest.com/oauth2/access_tokens/new . The $accessToken is “Your token” and $accountId is “Account ID” when you have created a new set of tokens . Factory . $factory = new \\Lsv\\TimeharvestSdk\\RequestFactory($client); . Parameters . | Parameter | Required | Type | Description | . | $client | true | string | The TimeharvestClient | . ",
     "url": "/timeharvest-sdk/docs/factory",
     
     "relUrl": "/docs/factory"
-  },"4": {
+  },"14": {
     "doc": "Home",
     "title": "Home",
     "content": ". PHP SDK for Timeharvest . Install . composer require lsv/timeharvest-sdk . Example usage . $factory = new \\Lsv\\TimeharvestSdk\\RequestFactory( new \\Lsv\\TimeharvestSdk\\TimeharvestClient($accessToken,$accountId) ); $response = $factory-&gt;clients()-&gt;listClients($isActive, $updatedSince, $page, $perPage); foreach ($response['data'] as $client) { // $client instanceof \\Lsv\\TimeharvestSdk\\Response\\Client\\ClientResponse } . License . The MIT License (MIT) . Copyright (c) 2023 Martin Aarhof martin.aarhof@gmail.com . Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: . The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. ",
     "url": "/timeharvest-sdk/",
     
     "relUrl": "/"
-  },"5": {
+  },"15": {
     "doc": "Todo",
     "title": "Todo",
     "content": ". | Clients . | Client | Contacts | . | Company | Invoices . | Messages | Payments | Invoices | Item categories | . | Estimates . | Messages | Estimates | Item categories | . | Expenses . | Expenses | Categories | . | Tasks | Time Entries | Projects . | User assignments | Task assignments | Projects | . | Roles | Users . | Teammates | Billable rates | Cost rates | Project assignments | Users | . | Reports . | Expenses | UnInvoiced | Time | Project budget | . | . ",

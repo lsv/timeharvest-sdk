@@ -6,9 +6,9 @@ has_children: false
 permalink: docs/todo
 ---
 
-- [ ] [Clients]({% link docs/clients/clients.md %})
+- [x] [Clients]({% link docs/clients/clients.md %})
     - [x] [Client]({% link docs/clients/client.md %})
-    - [ ] [Contacts]({% link docs/clients/contact.md %})
+    - [x] [Contacts]({% link docs/clients/contact.md %})
 - [ ] Company
 - [ ] Invoices
     - [ ] Messages
