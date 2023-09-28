@@ -6,6 +6,7 @@ namespace Lsv\TimeharvestSdk;
 
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Request\ClientsFactory;
+use Lsv\TimeharvestSdk\Request\UsersFactory;
 
 class RequestFactory
 {
@@ -19,6 +20,11 @@ class RequestFactory
     public function clients(): ClientsFactory
     {
         return new ClientsFactory($this);
+    }
+
+    public function users(): UsersFactory
+    {
+        return new UsersFactory($this);
     }
 
     public function request(AbstractRequest $request): mixed
