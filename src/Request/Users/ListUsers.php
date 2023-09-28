@@ -8,6 +8,7 @@ use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Response\MetaResponse;
 use Lsv\TimeharvestSdk\Response\User\UserData;
 use Lsv\TimeharvestSdk\Response\User\UsersResponse;
+use Lsv\TimeharvestSdk\Serializer;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class ListUsers extends AbstractRequest
@@ -28,8 +29,8 @@ class ListUsers extends AbstractRequest
     public function parseResponse(ResponseInterface $response): UsersResponse
     {
         $data = $response->toArray();
-        $meta = $this->deserializeData($data, MetaResponse::class);
-        $users = $this->deserializeData($data['users'], UserData::class.'[]');
+        $meta = Serializer::deserializeArray($data, MetaResponse::class);
+        $users = Serializer::deserializeArray($data['users'], UserData::class.'[]');
 
         return new UsersResponse($meta, $users);
     }
