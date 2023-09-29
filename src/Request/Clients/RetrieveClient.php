@@ -8,6 +8,7 @@ use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Response\Client\ClientData;
 use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
 use Lsv\TimeharvestSdk\Response\Client\ClientResponse;
+use Lsv\TimeharvestSdk\Serializer;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class RetrieveClient extends AbstractRequest
@@ -26,7 +27,7 @@ class RetrieveClient extends AbstractRequest
 
     public function parseResponse(ResponseInterface $response): ClientResponse
     {
-        return new ClientResponse($this->deserializeData($response->toArray(), ClientData::class));
+        return new ClientResponse(Serializer::deserializeArray($response->toArray(), ClientData::class));
     }
 
     public function getQuery(): array

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdkTest\Request;
 
+use Lsv\TimeharvestSdk\Dto\Clients\CreateClientDto;
+use Lsv\TimeharvestSdk\Dto\Clients\UpdateClientDto;
 use Lsv\TimeharvestSdk\Request\Clients\ContactFactory;
 use Lsv\TimeharvestSdk\Request\ClientsFactory;
 use Symfony\Component\HttpClient\Response\MockResponse;
@@ -52,7 +54,8 @@ class ClientsFactoryTest extends RequestTestCase
         $this->httpClient->setResponseFactory([
             new MockResponse((string) file_get_contents(__DIR__.'/Clients/create_client.json')),
         ]);
-        $this->clientFactory->createClient('name');
+        $dto = new CreateClientDto('name');
+        $this->clientFactory->createClient($dto);
         self::assertSame([
             'name' => 'name',
         ], $this->getHttpRequestOptions()['array']);
@@ -63,7 +66,8 @@ class ClientsFactoryTest extends RequestTestCase
         $this->httpClient->setResponseFactory([
             new MockResponse((string) file_get_contents(__DIR__.'/Clients/create_client.json')),
         ]);
-        $this->clientFactory->updateClient(1, 'name');
+        $dto = new UpdateClientDto('name');
+        $this->clientFactory->updateClient(1, $dto);
         self::assertSame([
             'name' => 'name',
         ], $this->getHttpRequestOptions()['array']);

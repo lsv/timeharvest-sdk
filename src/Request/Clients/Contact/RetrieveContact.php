@@ -7,6 +7,7 @@ namespace Lsv\TimeharvestSdk\Request\Clients\Contact;
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactData;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactResponse;
+use Lsv\TimeharvestSdk\Serializer;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class RetrieveContact extends AbstractRequest
@@ -27,6 +28,6 @@ class RetrieveContact extends AbstractRequest
     {
         $data = $response->toArray();
 
-        return new ContactResponse($this->deserializeData($data, ContactData::class));
+        return new ContactResponse(Serializer::deserializeArray($data, ContactData::class));
     }
 }

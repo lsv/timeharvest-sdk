@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Request;
 
+use Lsv\TimeharvestSdk\Dto\Clients\CreateClientDto;
+use Lsv\TimeharvestSdk\Dto\Clients\UpdateClientDto;
 use Lsv\TimeharvestSdk\Request\Clients\ContactFactory;
 use Lsv\TimeharvestSdk\Request\Clients\CreateClient;
 use Lsv\TimeharvestSdk\Request\Clients\DeleteClient;
@@ -32,14 +34,14 @@ readonly class ClientsFactory
         return $this->factory->request(new RetrieveClient($client));
     }
 
-    public function createClient(string $name, bool $isActive = null, string $address = null, string $currency = null): ClientResponse
+    public function createClient(CreateClientDto $dto): ClientResponse
     {
-        return $this->factory->request(new CreateClient($name, $isActive, $address, $currency));
+        return $this->factory->request(new CreateClient($dto));
     }
 
-    public function updateClient(int|ClientInfoData $client, string $name, bool $isActive = null, string $address = null, string $currency = null): ClientResponse
+    public function updateClient(int|ClientInfoData $client, UpdateClientDto $dto): ClientResponse
     {
-        return $this->factory->request(new UpdateClient($client, $name, $isActive, $address, $currency));
+        return $this->factory->request(new UpdateClient($client, $dto));
     }
 
     public function deleteClient(int|ClientInfoData $client): NullResponse

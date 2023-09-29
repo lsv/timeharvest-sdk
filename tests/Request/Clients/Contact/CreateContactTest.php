@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdkTest\Request\Clients\Contact;
 
+use Lsv\TimeharvestSdk\Dto\Clients\Contact\CreateContactDto;
 use Lsv\TimeharvestSdk\Request\Clients\Contact\CreateContact;
 use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
 use Lsv\TimeharvestSdkTest\Request\RequestTestCase;
@@ -18,8 +19,7 @@ class CreateContactTest extends RequestTestCase
         );
 
         $client = 1;
-        $request = new CreateContact(
-            $client,
+        $dto = new CreateContactDto($client,
             'first',
             'last',
             'title',
@@ -28,6 +28,7 @@ class CreateContactTest extends RequestTestCase
             '456',
             '789',
         );
+        $request = new CreateContact($dto);
 
         $this->factory->request($request);
 
@@ -59,7 +60,7 @@ class CreateContactTest extends RequestTestCase
 
         $client = new ClientInfoData();
         $client->id = 123;
-        $request = new CreateContact($client, 'first name');
+        $request = new CreateContact(new CreateContactDto($client, 'name'));
 
         $this->factory->request($request);
 

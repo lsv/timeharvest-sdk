@@ -72,7 +72,8 @@ $response->getData() instanceof {{page.dataResponse}}
 ### Usage
 
 ```php
-$response = {{page.factory}}->createClient($name, $isActive, $address, $currency);
+$dto = new \Lsv\TimeharvestSdk\Dto\Clients\CreateClientDto($name, $isActive, $address, $currency);
+$response = {{page.factory}}->createClient($dto);
 ```
 
 #### Parameters
@@ -95,7 +96,8 @@ $response->getData() instanceof {{page.dataResponse}}
 ### Usage
 
 ```php
-$response = {{page.factory}}->updateClient($client, $name, $isActive, $address, $currency);
+$dto = new \Lsv\TimeharvestSdk\Dto\Clients\UpdateClientDto($name, $isActive, $address, $currency);
+$response = {{page.factory}}->updateClient($client, $dto);
 ```
 
 #### Parameters
