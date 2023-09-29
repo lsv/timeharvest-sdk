@@ -9,6 +9,7 @@ use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactData;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactsResponse;
 use Lsv\TimeharvestSdk\Response\MetaResponse;
+use Lsv\TimeharvestSdk\Serializer;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class ListContacts extends AbstractRequest
@@ -21,14 +22,14 @@ class ListContacts extends AbstractRequest
     ) {
     }
 
-    protected function preQuery(\stdClass $values): void
+    protected function preQuery(array &$values): void
     {
         $id = null;
         if (null !== $this->clientId) {
             $id = $this->clientId instanceof ClientInfoData ? $this->clientId->id : $this->clientId;
         }
 
-        $values->clientId = $id;
+        $values['clientId'] = $id;
     }
 
     public function getUri(): string
@@ -39,8 +40,8 @@ class ListContacts extends AbstractRequest
     public function parseResponse(ResponseInterface $response): ContactsResponse
     {
         $data = $response->toArray();
-        $meta = $this->deserializeData($data, MetaResponse::class);
-        $contacts = $this->deserializeData($data['contacts'], ContactData::class.'[]');
+        $meta = Serializer::deserializeArray($data, MetaResponse::class);
+        $contacts = Serializer::deserializeArray($data['contacts'], ContactData::class.'[]');
 
         return new ContactsResponse($meta, $contacts);
     }

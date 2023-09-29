@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Request\Clients;
 
+use Lsv\TimeharvestSdk\Dto\Clients\Contact\CreateContactDto;
+use Lsv\TimeharvestSdk\Dto\Clients\Contact\UpdateContactDto;
 use Lsv\TimeharvestSdk\Request\Clients\Contact\CreateContact;
 use Lsv\TimeharvestSdk\Request\Clients\Contact\DeleteContact;
 use Lsv\TimeharvestSdk\Request\Clients\Contact\ListContacts;
@@ -11,7 +13,6 @@ use Lsv\TimeharvestSdk\Request\Clients\Contact\RetrieveContact;
 use Lsv\TimeharvestSdk\Request\Clients\Contact\UpdateContact;
 use Lsv\TimeharvestSdk\RequestFactory;
 use Lsv\TimeharvestSdk\Response\Client\ClientData;
-use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactData;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactResponse;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactsResponse;
@@ -38,30 +39,16 @@ readonly class ContactFactory
     }
 
     public function createContact(
-        int|ClientInfoData $clientId,
-        string $firstName,
-        string $lastName = null,
-        string $title = null,
-        string $email = null,
-        string $phoneOffice = null,
-        string $phoneMobile = null,
-        string $fax = null
+        CreateContactDto $dto
     ): ContactResponse {
-        return $this->factory->request(new CreateContact($clientId, $firstName, $lastName, $title, $email, $phoneOffice, $phoneMobile, $fax));
+        return $this->factory->request(new CreateContact($dto));
     }
 
     public function updateContact(
         int|ContactData $contact,
-        int|ClientInfoData $clientId = null,
-        string $firstName = null,
-        string $lastName = null,
-        string $title = null,
-        string $email = null,
-        string $phoneOffice = null,
-        string $phoneMobile = null,
-        string $fax = null
+        UpdateContactDto $dto,
     ): ContactResponse {
-        return $this->factory->request(new UpdateContact($contact, $clientId, $firstName, $lastName, $title, $email, $phoneOffice, $phoneMobile, $fax));
+        return $this->factory->request(new UpdateContact($contact, $dto));
     }
 
     public function deleteContact(int|ContactData $contact): NullResponse

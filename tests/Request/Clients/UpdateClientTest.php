@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdkTest\Request\Clients;
 
+use Lsv\TimeharvestSdk\Dto\Clients\UpdateClientDto;
 use Lsv\TimeharvestSdk\Request\Clients\UpdateClient;
 use Lsv\TimeharvestSdk\Response\Client\ClientData;
 use Lsv\TimeharvestSdkTest\Request\RequestTestCase;
@@ -17,7 +18,8 @@ class UpdateClientTest extends RequestTestCase
             new MockResponse((string) file_get_contents(__DIR__.'/create_client.json'))
         );
 
-        $request = new UpdateClient(1, 'name', true, "address\nline2", 'EUR');
+        $dto = new UpdateClientDto('name', true, "address\nline2", 'EUR');
+        $request = new UpdateClient(1, $dto);
         $response = $this->factory->request($request);
 
         self::assertStringEndsWith('1', $this->getHttpRequestOptions()['url']);
@@ -45,7 +47,8 @@ class UpdateClientTest extends RequestTestCase
         $client = new ClientData();
         $client->id = 1;
 
-        $request = new UpdateClient($client, 'name', true, "address\nline2", 'EUR');
+        $dto = new UpdateClientDto();
+        $request = new UpdateClient($client, $dto);
         $this->factory->request($request);
         self::assertStringEndsWith('1', $this->getHttpRequestOptions()['url']);
     }

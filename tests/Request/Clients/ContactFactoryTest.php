@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdkTest\Request\Clients;
 
-use Lsv\TimeharvestSdk\Response\Client\Contact\ContactData;
-use Lsv\TimeharvestSdk\Response\MetaResponse;
+use Lsv\TimeharvestSdk\Dto\Clients\Contact\CreateContactDto;
+use Lsv\TimeharvestSdk\Dto\Clients\Contact\UpdateContactDto;
 use Lsv\TimeharvestSdkTest\Request\RequestTestCase;
 use Symfony\Component\HttpClient\Response\MockResponse;
 
@@ -20,11 +20,10 @@ class ContactFactoryTest extends RequestTestCase
         $response = $this->factory->clients()->contacts()->listContacts();
 
         self::assertSame(
-            ['page' => 1, 'per_page' => 2000, 'client_id' => null],
+            ['page' => 1, 'per_page' => 2000],
             $this->getHttpRequestOptions()['query']
         );
 
-        self::assertInstanceOf(MetaResponse::class, $response->getMeta());
         self::assertCount(2, $response->getData());
     }
 
@@ -42,7 +41,6 @@ class ContactFactoryTest extends RequestTestCase
         );
 
         self::assertNull($response->getMeta());
-        self::assertInstanceOf(ContactData::class, $response->getData());
         self::assertSame(4706479, $response->getData()->id);
     }
 
@@ -52,7 +50,7 @@ class ContactFactoryTest extends RequestTestCase
             new MockResponse((string) file_get_contents(__DIR__.'/Contact/retrieve_contact.json'))
         );
 
-        $response = $this->factory->clients()->contacts()->createContact(1, 'first name');
+        $response = $this->factory->clients()->contacts()->createContact(new CreateContactDto(1, 'name'));
 
         self::assertStringEndsWith(
             '/contacts',
@@ -60,7 +58,6 @@ class ContactFactoryTest extends RequestTestCase
         );
 
         self::assertNull($response->getMeta());
-        self::assertInstanceOf(ContactData::class, $response->getData());
         self::assertSame(4706479, $response->getData()->id);
     }
 
@@ -70,7 +67,7 @@ class ContactFactoryTest extends RequestTestCase
             new MockResponse((string) file_get_contents(__DIR__.'/Contact/retrieve_contact.json'))
         );
 
-        $response = $this->factory->clients()->contacts()->updateContact(111);
+        $response = $this->factory->clients()->contacts()->updateContact(111, new UpdateContactDto());
 
         self::assertStringEndsWith(
             '/contacts/111',
@@ -78,7 +75,6 @@ class ContactFactoryTest extends RequestTestCase
         );
 
         self::assertNull($response->getMeta());
-        self::assertInstanceOf(ContactData::class, $response->getData());
         self::assertSame(4706479, $response->getData()->id);
     }
 

@@ -71,7 +71,7 @@ $response->getData() instanceof {{page.dataResponse}}
 ### Usage
 
 ```php
-$response = {{page.factory}}->createContact(
+$dto = new \Lsv\TimeharvestSdk\Dto\Clients\Contact\CreateContactDto(
     $clientId,
     $firstName,
     $lastName,
@@ -81,6 +81,7 @@ $response = {{page.factory}}->createContact(
     $phoneMobile,
     $fax
 );
+$response = {{page.factory}}->createContact($dto);
 ```
 
 #### Parameters
@@ -107,8 +108,7 @@ $response->getData() instanceof {{page.dataResponse}}
 ### Usage
 
 ```php
-$response = {{page.factory}}->updateContact(
-    $contact,
+$dto = new \Lsv\TimeharvestSdk\Dto\Clients\Contact\UpdateContactDto(
     $clientId,
     $firstName,
     $lastName,
@@ -118,6 +118,7 @@ $response = {{page.factory}}->updateContact(
     $phoneMobile,
     $fax
 );
+$response = {{page.factory}}->updateContact($contact, $dto);
 ```
 
 #### Parameters

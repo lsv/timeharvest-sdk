@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdkTest\Request\Clients;
 
+use Lsv\TimeharvestSdk\Dto\Clients\CreateClientDto;
 use Lsv\TimeharvestSdk\Request\Clients\CreateClient;
 use Lsv\TimeharvestSdkTest\Request\RequestTestCase;
 use Symfony\Component\HttpClient\Response\MockResponse;
@@ -16,7 +17,8 @@ class CreateClientTest extends RequestTestCase
             new MockResponse((string) file_get_contents(__DIR__.'/create_client.json'))
         );
 
-        $request = new CreateClient('name', true, "address\nline2", 'EUR');
+        $dto = new CreateClientDto('name', true, "address\nline2", 'EUR');
+        $request = new CreateClient($dto);
         $response = $this->factory->request($request);
 
         self::assertSame([

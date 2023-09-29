@@ -4,27 +4,11 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Request;
 
-use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
-use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
-use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
+use Lsv\TimeharvestSdk\Dto\DtoInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 abstract class AbstractRequest
 {
-    /**
-     * @param array<mixed> $data
-     */
-    protected function deserializeData(array $data, string $type): mixed
-    {
-        return $this->getSerializer()->deserialize(json_encode($data, JSON_THROW_ON_ERROR), $type, 'json');
-    }
-
     public function getMethod(): string
     {
         return 'GET';
@@ -39,52 +23,31 @@ abstract class AbstractRequest
     {
         $ref = new \ReflectionClass($this);
         $properties = $ref->getProperties(\ReflectionProperty::IS_PUBLIC);
-        $values = new \stdClass();
+        $values = [];
         foreach ($properties as $property) {
-            if (null === ($value = $property->getValue($this))) {
-                continue;
-            }
+            if ($property->getValue($this) instanceof DtoInterface) {
+                $values = \Lsv\TimeharvestSdk\Serializer::normalize($property->getValue($this));
+            } else {
+                if (null === ($value = $property->getValue($this))) {
+                    continue;
+                }
 
-            $values->{$property->getName()} = $value;
+                $values[$property->getName()] = $value;
+            }
         }
+
         $this->preQuery($values);
 
-        $data = $this->getSerializer()->serialize($values, 'json');
-
-        /* @noinspection JsonEncodingApiUsageInspection */
-        return json_decode($data, true, flags: JSON_THROW_ON_ERROR);
+        return \Lsv\TimeharvestSdk\Serializer::normalize((object) $values);
     }
 
     /** @infection-ignore-all */
-    protected function preQuery(\stdClass $values): void
+    /**
+     * @param array<string, mixed> $values
+     */
+    protected function preQuery(array &$values): void
     {
     }
 
     abstract public function parseResponse(ResponseInterface $response): mixed;
-
-    private function getSerializer(): SerializerInterface
-    {
-        $propertyTypeExtractor = new PropertyInfoExtractor(
-            typeExtractors: [
-                // new PhpDocExtractor(),
-                new ReflectionExtractor(),
-            ],
-        );
-
-        $normalizers = [
-            // new BackedEnumNormalizer(),
-            new ArrayDenormalizer(),
-            new DateTimeNormalizer(),
-            new ObjectNormalizer(
-                nameConverter: new CamelCaseToSnakeCaseNameConverter(),
-                propertyTypeExtractor: $propertyTypeExtractor
-            ),
-        ];
-
-        $encoders = [
-            new JsonEncoder(),
-        ];
-
-        return new Serializer($normalizers, $encoders);
-    }
 }
