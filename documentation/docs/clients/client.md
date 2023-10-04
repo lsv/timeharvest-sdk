@@ -23,7 +23,7 @@ Returns a list of your clients
 ### Usage
 
 ```php
-$response = {{page.factory}}->listClients($isActive, $updatedSince, $page, $perPage);
+$response = {{page.factory}}->listClients($isActive, $updatedSince, $meta);
 $meta = $response->getMeta();
 $meta instanceof \Lsv\TimeharvestSdk\Response\MetaResponse
 foreach ($response->getData() as $client) {
@@ -33,12 +33,11 @@ foreach ($response->getData() as $client) {
 
 #### Parameters
 
-| Parameter       | Required | Type              | Description                                 |
-|-----------------|----------|-------------------|---------------------------------------------|
-| `$isActive`     | false    | bool              | Select only active or inactive clients      |
-| `$updatedSince` | false    | DateTimeInterface | Only select clients updated after this date |
-| `$page`         | false    | int               | Page number                                 |
-| `$perPage`      | false    | int               | How many per page                           |
+| Parameter       | Required | Type                                      | Description                                 |
+|-----------------|----------|-------------------------------------------|---------------------------------------------|
+| `$isActive`     | false    | bool                                      | Select only active or inactive clients      |
+| `$updatedSince` | false    | DateTimeInterface                         | Only select clients updated after this date |
+| `$meta`         | false    | \Lsv\TimeharvestSdk\Response\MetaResponse | Pagination                                  |
 
 #### Response
 

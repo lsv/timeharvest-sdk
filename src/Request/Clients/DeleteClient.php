@@ -30,6 +30,6 @@ class DeleteClient extends AbstractRequest
 
     public function parseResponse(ResponseInterface $response): NullResponse
     {
-        return new NullResponse();
+        return new NullResponse($response->getStatusCode());
     }
 }

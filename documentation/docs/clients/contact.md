@@ -23,7 +23,7 @@ Returns a list of the contacts
 ### Usage
 
 ```php
-$response = {{page.factory}}->listContacts($clientId, $updatedSince, $page, $perPage);
+$response = {{page.factory}}->listContacts($clientId, $updatedSince, $meta);
 $response->getMeta() instanceof \Lsv\TimeharvestSdk\Response\MetaResponse
 foreach ($response->getData() as $client) {
     $client instanceof {{page.dataResponse}}
@@ -32,12 +32,11 @@ foreach ($response->getData() as $client) {
 
 #### Parameters
 
-| Parameter       | Required | Type                        | Description                                      |
-|-----------------|----------|-----------------------------|--------------------------------------------------|
-| `$clientId`     | false    | int \| `ClientInfoResponse` | Select only contacts that belongs to this client |
-| `$updatedSince` | false    | DateTimeInterface           | Only select contacts updated after this date     |
-| `$page`         | false    | int                         | Page number                                      |
-| `$perPage`      | false    | int                         | How many per page                                |
+| Parameter       | Required | Type                                      | Description                                      |
+|-----------------|----------|-------------------------------------------|--------------------------------------------------|
+| `$clientId`     | false    | int \| `ClientInfoResponse`               | Select only contacts that belongs to this client |
+| `$updatedSince` | false    | DateTimeInterface                         | Only select contacts updated after this date     |
+| `$meta`         | false    | \Lsv\TimeharvestSdk\Response\MetaResponse | Pagination                                       |
 
 #### Response
 

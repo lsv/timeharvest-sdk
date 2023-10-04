@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Request;
 
+use Lsv\TimeharvestSdk\Request\Users\DeleteUser;
 use Lsv\TimeharvestSdk\Request\Users\ListUsers;
 use Lsv\TimeharvestSdk\Request\Users\MeUser;
 use Lsv\TimeharvestSdk\Request\Users\RetrieveUser;
 use Lsv\TimeharvestSdk\RequestFactory;
+use Lsv\TimeharvestSdk\Response\NullResponse;
 use Lsv\TimeharvestSdk\Response\User\UserData;
 use Lsv\TimeharvestSdk\Response\User\UserResponse;
 use Lsv\TimeharvestSdk\Response\User\UsersResponse;
@@ -32,5 +34,10 @@ readonly class UsersFactory
     public function retrieveUser(int|UserData $userData): UserResponse
     {
         return $this->factory->request(new RetrieveUser($userData));
+    }
+
+    public function deleteUser(int|UserData $userData): NullResponse
+    {
+        return $this->factory->request(new DeleteUser($userData));
     }
 }

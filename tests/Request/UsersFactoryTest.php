@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lsv\TimeharvestSdkTest\Request;
 
 use Lsv\TimeharvestSdk\Request\UsersFactory;
+use Lsv\TimeharvestSdk\Response\NullResponse;
 use Lsv\TimeharvestSdk\Response\User\UserData;
 use Symfony\Component\HttpClient\Response\MockResponse;
 
@@ -48,5 +49,18 @@ class UsersFactoryTest extends RequestTestCase
         $user->id = 1234;
         $this->userFactory->retrieveUser($user);
         self::assertStringEndsWith('/users/1234', $this->getHttpRequestOptions()['url']);
+    }
+
+    public function testDeleteUser(): void
+    {
+        $this->httpClient->setResponseFactory(
+            new MockResponse((string) file_get_contents(__DIR__.'/Users/retrieve_user.json'))
+        );
+        $user = new UserData();
+        $user->id = 1234;
+        $response = $this->userFactory->deleteUser($user);
+        self::assertInstanceOf(NullResponse::class, $response);
+        self::assertStringEndsWith('/users/1234', $this->getHttpRequestOptions()['url']);
+        self::assertStringEndsWith('DELETE', $this->getHttpRequestOptions()['method']);
     }
 }
