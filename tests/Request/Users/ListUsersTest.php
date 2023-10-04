@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lsv\TimeharvestSdkTest\Request\Users;
 
 use Lsv\TimeharvestSdk\Request\Users\ListUsers;
+use Lsv\TimeharvestSdk\Response\MetaResponse;
 use Lsv\TimeharvestSdk\Response\User\UsersResponse;
 use Lsv\TimeharvestSdkTest\Request\RequestTestCase;
 use Symfony\Component\HttpClient\Response\MockResponse;
@@ -21,7 +22,7 @@ class ListUsersTest extends RequestTestCase
         /** @var UsersResponse $response */
         $response = $this->factory->request($request);
         self::assertSame(
-            ['page' => 1, 'per_page' => 2000],
+            [],
             $this->getHttpRequestOptions()['query']
         );
 
@@ -57,5 +58,21 @@ class ListUsersTest extends RequestTestCase
         self::assertSame(['Developer'], $user->roles);
         self::assertSame(['member'], $user->accessRoles);
         self::assertSame('https://cache.harvestapp.com/assets/profile_images/abraj_albait_towers.png?1498516481', $user->avatarUrl);
+    }
+
+    public function testPagination(): void
+    {
+        $this->httpClient->setResponseFactory(
+            new MockResponse((string) file_get_contents(__DIR__.'/list_users.json'))
+        );
+
+        $meta = new MetaResponse();
+        $meta->nextPage = 'https://api.harvestapp.com/v2/users?page=2&per_page=20';
+        $request = new ListUsers(meta: $meta);
+        $this->factory->request($request);
+        self::assertSame(
+            ['page' => 2, 'per_page' => 20],
+            $this->getHttpRequestOptions()['query']
+        );
     }
 }

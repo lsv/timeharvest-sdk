@@ -33,7 +33,7 @@ class ListContacts extends AbstractRequest
 
         $values['clientId'] = $id;
 
-        $this->setPagination($values);
+        self::setPagination($this->meta, $values);
     }
 
     public function getUri(): string

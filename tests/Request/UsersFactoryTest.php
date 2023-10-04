@@ -27,7 +27,7 @@ class UsersFactoryTest extends RequestTestCase
         );
         $this->userFactory->listUsers();
         self::assertSame(
-            ['page' => 1, 'per_page' => 2000],
+            [],
             $this->getHttpRequestOptions()['query']
         );
     }

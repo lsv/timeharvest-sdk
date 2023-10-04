@@ -14,6 +14,7 @@ use Lsv\TimeharvestSdk\Request\Users\MeUser;
 use Lsv\TimeharvestSdk\Request\Users\RetrieveUser;
 use Lsv\TimeharvestSdk\Request\Users\UpdateUser;
 use Lsv\TimeharvestSdk\RequestFactory;
+use Lsv\TimeharvestSdk\Response\MetaResponse;
 use Lsv\TimeharvestSdk\Response\NullResponse;
 use Lsv\TimeharvestSdk\Response\User\UserData;
 use Lsv\TimeharvestSdk\Response\User\UserResponse;
@@ -26,9 +27,9 @@ readonly class UsersFactory
     ) {
     }
 
-    public function listUsers(bool $isActive = null, \DateTimeInterface $updatedSince = null, int $page = 1, int $perPage = 2000): UsersResponse
+    public function listUsers(bool $isActive = null, \DateTimeInterface $updatedSince = null, MetaResponse $meta = null): UsersResponse
     {
-        return $this->factory->request(new ListUsers($isActive, $updatedSince, $page, $perPage));
+        return $this->factory->request(new ListUsers($isActive, $updatedSince, $meta));
     }
 
     public function me(): UserResponse

@@ -4,14 +4,20 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Request;
 
+use Lsv\TimeharvestSdk\Response\MetaResponse;
+
 trait PaginationTrait
 {
     /**
      * @param array<string, mixed> $values
      */
-    private function setPagination(array &$values): void
+    private static function setPagination(?MetaResponse $meta, array &$values): void
     {
-        if (!$nextPage = $this->meta?->nextPage) {
+        if (!$meta) {
+            return;
+        }
+
+        if (!$nextPage = $meta->nextPage) {
             return;
         }
 

@@ -39,6 +39,6 @@ class ListClients extends AbstractRequest
 
     protected function preQuery(array &$values): void
     {
-        $this->setPagination($values);
+        self::setPagination($this->meta, $values);
     }
 }

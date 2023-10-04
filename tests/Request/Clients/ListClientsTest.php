@@ -71,6 +71,22 @@ class ListClientsTest extends RequestTestCase
         );
     }
 
+    public function testNoPaging(): void
+    {
+        $meta = new MetaResponse();
+        $meta->nextPage = null;
+
+        $this->httpClient->setResponseFactory(
+            new MockResponse((string) file_get_contents(__DIR__.'/list_clients.json'))
+        );
+        $request = new ListClients(meta: $meta);
+        $this->factory->request($request);
+        self::assertSame(
+            [],
+            $this->getHttpRequestOptions()['query']
+        );
+    }
+
     public static function httpErrorCodesResponseProvider(): \Generator
     {
         yield [403];

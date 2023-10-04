@@ -29,12 +29,12 @@ permalink: docs/todo
     - [ ] Task assignments
     - [ ] Projects
 - [ ] Roles
-- [ ] Users
+- [x] [Users]({% link docs/users/users.md %})
     - [ ] Teammates
     - [ ] Billable rates
     - [ ] Cost rates
     - [ ] Project assignments
-    - [ ] Users
+    - [x] [Users]({% link docs/users/user.md %})
 - [ ] Reports
     - [ ] Expenses
     - [ ] UnInvoiced
