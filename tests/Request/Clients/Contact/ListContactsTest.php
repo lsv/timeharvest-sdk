@@ -7,6 +7,7 @@ namespace Lsv\TimeharvestSdkTest\Request\Clients\Contact;
 use Lsv\TimeharvestSdk\Request\Clients\Contact\ListContacts;
 use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactData;
+use Lsv\TimeharvestSdk\Response\MetaResponse;
 use Lsv\TimeharvestSdkTest\Request\RequestTestCase;
 use Symfony\Component\HttpClient\Response\MockResponse;
 
@@ -22,7 +23,7 @@ class ListContactsTest extends RequestTestCase
         $response = $this->factory->request($request);
 
         self::assertSame(
-            ['page' => 1, 'per_page' => 2000, 'client_id' => 1],
+            ['client_id' => 1],
             $this->getHttpRequestOptions()['query']
         );
 
@@ -59,7 +60,23 @@ class ListContactsTest extends RequestTestCase
         $this->factory->request($request);
 
         self::assertSame(
-            ['page' => 1, 'per_page' => 2000, 'client_id' => 1],
+            ['client_id' => 1],
+            $this->getHttpRequestOptions()['query']
+        );
+    }
+
+    public function testPaging(): void
+    {
+        $meta = new MetaResponse();
+        $meta->nextPage = 'https://api.harvestapp.com/v2/contacts?page=2&per_page=20';
+
+        $this->httpClient->setResponseFactory(
+            new MockResponse((string) file_get_contents(__DIR__.'/list_contacts.json'))
+        );
+        $request = new ListContacts(meta: $meta);
+        $this->factory->request($request);
+        self::assertSame(
+            ['page' => 2, 'per_page' => 20],
             $this->getHttpRequestOptions()['query']
         );
     }

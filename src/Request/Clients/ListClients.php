@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lsv\TimeharvestSdk\Request\Clients;
 
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
+use Lsv\TimeharvestSdk\Request\PaginationTrait;
 use Lsv\TimeharvestSdk\Response\Client\ClientData;
 use Lsv\TimeharvestSdk\Response\Client\ClientsResponse;
 use Lsv\TimeharvestSdk\Response\MetaResponse;
@@ -13,11 +14,12 @@ use Symfony\Contracts\HttpClient\ResponseInterface as HttpResponseInterface;
 
 class ListClients extends AbstractRequest
 {
+    use PaginationTrait;
+
     public function __construct(
-        public readonly ?bool $isActive,
-        public readonly ?\DateTimeInterface $updatedSince,
-        public readonly int $page,
-        public readonly int $perPage,
+        public readonly ?bool $isActive = null,
+        public readonly ?\DateTimeInterface $updatedSince = null,
+        private readonly ?MetaResponse $meta = null,
     ) {
     }
 
@@ -33,5 +35,10 @@ class ListClients extends AbstractRequest
         $clients = Serializer::deserializeArray($data['clients'], ClientData::class.'[]');
 
         return new ClientsResponse($meta, $clients);
+    }
+
+    protected function preQuery(array &$values): void
+    {
+        self::setPagination($this->meta, $values);
     }
 }

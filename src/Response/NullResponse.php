@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Response;
 
-class NullResponse implements ResponseInterface
+readonly class NullResponse implements ResponseInterface
 {
+    public function __construct(
+        public int $statusCode,
+    ) {
+    }
+
     public function getMeta(): null
     {
         return null;

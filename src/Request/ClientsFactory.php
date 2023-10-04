@@ -16,6 +16,7 @@ use Lsv\TimeharvestSdk\RequestFactory;
 use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
 use Lsv\TimeharvestSdk\Response\Client\ClientResponse;
 use Lsv\TimeharvestSdk\Response\Client\ClientsResponse;
+use Lsv\TimeharvestSdk\Response\MetaResponse;
 use Lsv\TimeharvestSdk\Response\NullResponse;
 
 readonly class ClientsFactory
@@ -24,9 +25,9 @@ readonly class ClientsFactory
     {
     }
 
-    public function listClients(bool $isActive = null, \DateTimeInterface $updatedSince = null, int $page = 1, int $perPage = 2000): ClientsResponse
+    public function listClients(bool $isActive = null, \DateTimeInterface $updatedSince = null, MetaResponse $meta = null): ClientsResponse
     {
-        return $this->factory->request(new ListClients($isActive, $updatedSince, $page, $perPage));
+        return $this->factory->request(new ListClients($isActive, $updatedSince, $meta));
     }
 
     public function getClient(int|ClientInfoData $client): ClientResponse

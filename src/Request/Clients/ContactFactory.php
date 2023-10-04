@@ -16,6 +16,7 @@ use Lsv\TimeharvestSdk\Response\Client\ClientData;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactData;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactResponse;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactsResponse;
+use Lsv\TimeharvestSdk\Response\MetaResponse;
 use Lsv\TimeharvestSdk\Response\NullResponse;
 
 readonly class ContactFactory
@@ -27,10 +28,9 @@ readonly class ContactFactory
     public function listContacts(
         int|ClientData $client = null,
         \DateTimeInterface $updatedSince = null,
-        int $page = 1,
-        int $perPage = 2000
+        MetaResponse $meta = null
     ): ContactsResponse {
-        return $this->factory->request(new ListContacts($client, $updatedSince, $page, $perPage));
+        return $this->factory->request(new ListContacts($client, $updatedSince, $meta));
     }
 
     public function retrieveContact(int|ContactData $contact): ContactResponse

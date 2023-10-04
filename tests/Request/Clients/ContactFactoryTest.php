@@ -20,7 +20,7 @@ class ContactFactoryTest extends RequestTestCase
         $response = $this->factory->clients()->contacts()->listContacts();
 
         self::assertSame(
-            ['page' => 1, 'per_page' => 2000],
+            [],
             $this->getHttpRequestOptions()['query']
         );
 

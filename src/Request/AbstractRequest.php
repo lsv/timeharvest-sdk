@@ -27,13 +27,16 @@ abstract class AbstractRequest
         foreach ($properties as $property) {
             if ($property->getValue($this) instanceof DtoInterface) {
                 $values = \Lsv\TimeharvestSdk\Serializer::normalize($property->getValue($this));
-            } else {
-                if (null === ($value = $property->getValue($this))) {
-                    continue;
-                }
-
-                $values[$property->getName()] = $value;
+                /* @infection-ignore-all */
+                continue;
             }
+
+            if (null === ($value = $property->getValue($this))) {
+                /* @infection-ignore-all */
+                continue;
+            }
+
+            $values[$property->getName()] = $value;
         }
 
         $this->preQuery($values);
