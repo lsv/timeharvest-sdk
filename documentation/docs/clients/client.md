@@ -51,7 +51,7 @@ $response->getData() array of {{page.dataResponse}}
 ### Usage
 
 ```php
-$response = $factory->clients()->getClient($client);
+$response = $factory->clients()->retrieveClient($client);
 ```
 
 #### Parameters

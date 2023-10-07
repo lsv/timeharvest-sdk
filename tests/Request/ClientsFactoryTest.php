@@ -40,12 +40,12 @@ class ClientsFactoryTest extends RequestTestCase
             new MockResponse((string) file_get_contents(__DIR__.'/Clients/retrieve_client.json')),
         ]);
 
-        $this->clientFactory->getClient(1);
+        $this->clientFactory->retrieveClient(1);
         self::assertStringEndsWith('1', $this->getHttpRequestOptions()['url']);
 
         $client = new \Lsv\TimeharvestSdk\Response\Client\ClientData();
         $client->id = 1;
-        $this->clientFactory->getClient($client);
+        $this->clientFactory->retrieveClient($client);
         self::assertStringEndsWith('1', $this->getHttpRequestOptions()['url']);
     }
 
