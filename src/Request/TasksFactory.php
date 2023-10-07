@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Request;
 
+use Lsv\TimeharvestSdk\Dto\Tasks\CreateTaskDto;
+use Lsv\TimeharvestSdk\Request\Tasks\CreateTask;
 use Lsv\TimeharvestSdk\Request\Tasks\ListTasks;
 use Lsv\TimeharvestSdk\Request\Tasks\RetrieveTask;
 use Lsv\TimeharvestSdk\RequestFactory;
@@ -27,5 +29,10 @@ readonly class TasksFactory
     public function retrieveTask(int|TaskData $task): TaskResponse
     {
         return $this->factory->request(new RetrieveTask($task));
+    }
+
+    public function createTask(CreateTaskDto $dto): TaskResponse
+    {
+        return $this->factory->request(new CreateTask($dto));
     }
 }
