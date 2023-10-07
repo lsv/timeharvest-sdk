@@ -30,7 +30,7 @@ readonly class ClientsFactory
         return $this->factory->request(new ListClients($isActive, $updatedSince, $meta));
     }
 
-    public function getClient(int|ClientInfoData $client): ClientResponse
+    public function retrieveClient(int|ClientInfoData $client): ClientResponse
     {
         return $this->factory->request(new RetrieveClient($client));
     }

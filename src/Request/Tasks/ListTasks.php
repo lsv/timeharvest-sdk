@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Lsv\TimeharvestSdk\Request\Clients;
+namespace Lsv\TimeharvestSdk\Request\Tasks;
 
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
-use Lsv\TimeharvestSdk\Response\Client\ClientData;
-use Lsv\TimeharvestSdk\Response\Client\ClientsResponse;
 use Lsv\TimeharvestSdk\Response\MetaResponse;
+use Lsv\TimeharvestSdk\Response\Task\TaskData;
+use Lsv\TimeharvestSdk\Response\Task\TasksResponse;
 use Lsv\TimeharvestSdk\Serializer;
-use Symfony\Contracts\HttpClient\ResponseInterface as HttpResponseInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 
-class ListClients extends AbstractRequest
+class ListTasks extends AbstractRequest
 {
     public function __construct(
         public readonly ?bool $isActive = null,
@@ -22,15 +22,15 @@ class ListClients extends AbstractRequest
 
     public function getUri(): string
     {
-        return 'clients';
+        return '/tasks';
     }
 
-    public function parseResponse(HttpResponseInterface $response): ClientsResponse
+    public function parseResponse(ResponseInterface $response): TasksResponse
     {
         $data = $response->toArray();
         $meta = Serializer::deserializeArray($data, MetaResponse::class);
-        $clients = Serializer::deserializeArray($data['clients'], ClientData::class.'[]');
+        $tasks = Serializer::deserializeArray($data['tasks'], TaskData::class.'[]');
 
-        return new ClientsResponse($meta, $clients);
+        return new TasksResponse($meta, $tasks);
     }
 }

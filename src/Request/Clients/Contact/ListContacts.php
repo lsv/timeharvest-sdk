@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Lsv\TimeharvestSdk\Request\Clients\Contact;
 
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
-use Lsv\TimeharvestSdk\Request\PaginationTrait;
 use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactData;
 use Lsv\TimeharvestSdk\Response\Client\Contact\ContactsResponse;
@@ -15,12 +14,10 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class ListContacts extends AbstractRequest
 {
-    use PaginationTrait;
-
     public function __construct(
         private readonly null|int|ClientInfoData $clientId = null,
         public readonly ?\DateTimeInterface $updatedSince = null,
-        private readonly ?MetaResponse $meta = null,
+        public readonly ?MetaResponse $meta = null,
     ) {
     }
 
@@ -32,8 +29,6 @@ class ListContacts extends AbstractRequest
         }
 
         $values['clientId'] = $id;
-
-        self::setPagination($this->meta, $values);
     }
 
     public function getUri(): string
