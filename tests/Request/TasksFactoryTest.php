@@ -66,6 +66,7 @@ class TasksFactoryTest extends RequestTestCase
         $dto = new \Lsv\TimeharvestSdk\Dto\Tasks\CreateTaskDto('name');
         $response = $this->factory->tasks()->createTask($dto);
         self::assertInstanceOf(TaskData::class, $response->getData());
+        self::assertStringEndsWith('POST', $this->getHttpRequestOptions()['method']);
     }
 
     public function testUpdateTask(): void
@@ -82,6 +83,7 @@ class TasksFactoryTest extends RequestTestCase
             $this->getHttpRequestOptions()['url']
         );
         self::assertInstanceOf(TaskData::class, $response->getData());
+        self::assertStringEndsWith('PATCH', $this->getHttpRequestOptions()['method']);
     }
 
     public function testUpdateTaskByTask(): void
@@ -99,5 +101,37 @@ class TasksFactoryTest extends RequestTestCase
             $this->getHttpRequestOptions()['url']
         );
         self::assertInstanceOf(TaskData::class, $response->getData());
+        self::assertStringEndsWith('PATCH', $this->getHttpRequestOptions()['method']);
+    }
+
+    public function testDeleteTask(): void
+    {
+        $this->httpClient->setResponseFactory(
+            new MockResponse('', ['http_code' => 201])
+        );
+
+        $task = 1;
+        $this->factory->tasks()->deleteTask($task);
+        self::assertStringEndsWith(
+            '/tasks/1',
+            $this->getHttpRequestOptions()['url']
+        );
+        self::assertStringEndsWith('DELETE', $this->getHttpRequestOptions()['method']);
+    }
+
+    public function testDeleteTaskByTask(): void
+    {
+        $this->httpClient->setResponseFactory(
+            new MockResponse('', ['http_code' => 201])
+        );
+
+        $task = new TaskData();
+        $task->id = 2;
+        $this->factory->tasks()->deleteTask($task);
+        self::assertStringEndsWith(
+            '/tasks/2',
+            $this->getHttpRequestOptions()['url']
+        );
+        self::assertStringEndsWith('DELETE', $this->getHttpRequestOptions()['method']);
     }
 }
