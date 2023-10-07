@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdkTest\Request;
 
+use Lsv\TimeharvestSdk\Response\Task\TaskData;
+use Lsv\TimeharvestSdk\Response\Task\TaskResponse;
 use Lsv\TimeharvestSdk\Response\Task\TasksResponse;
 use Symfony\Component\HttpClient\Response\MockResponse;
 
@@ -21,6 +23,37 @@ class TasksFactoryTest extends RequestTestCase
             $this->getHttpRequestOptions()['url']
         );
         self::assertInstanceOf(TasksResponse::class, $response);
-        self::assertCount(5, $response->tasks);
+        self::assertCount(5, $response->getData());
+    }
+
+    public function testRetrieveTask(): void
+    {
+        $this->httpClient->setResponseFactory(
+            new MockResponse((string) file_get_contents(__DIR__.'/Tasks/retrieve_task.json'))
+        );
+
+        $response = $this->factory->tasks()->retrieveTask(1);
+        self::assertStringEndsWith(
+            '/tasks/1',
+            $this->getHttpRequestOptions()['url']
+        );
+        self::assertSame(8083800, $response->getData()->id);
+        self::assertNull($response->getMeta());
+    }
+
+    public function testRetrieveTaskByTask(): void
+    {
+        $this->httpClient->setResponseFactory(
+            new MockResponse((string) file_get_contents(__DIR__.'/Tasks/retrieve_task.json'))
+        );
+
+        $task = new TaskData();
+        $task->id = 2;
+        $response = $this->factory->tasks()->retrieveTask($task);
+        self::assertStringEndsWith(
+            '/tasks/2',
+            $this->getHttpRequestOptions()['url']
+        );
+        self::assertInstanceOf(TaskResponse::class, $response);
     }
 }

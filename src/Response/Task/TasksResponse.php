@@ -13,8 +13,8 @@ readonly class TasksResponse implements ResponseInterface
      * @param TaskData[] $tasks
      */
     public function __construct(
-        public MetaResponse $meta,
-        public array $tasks,
+        private MetaResponse $meta,
+        private array $tasks,
     ) {
     }
 
