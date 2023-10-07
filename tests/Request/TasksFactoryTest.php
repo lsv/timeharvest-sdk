@@ -67,4 +67,37 @@ class TasksFactoryTest extends RequestTestCase
         $response = $this->factory->tasks()->createTask($dto);
         self::assertInstanceOf(TaskData::class, $response->getData());
     }
+
+    public function testUpdateTask(): void
+    {
+        $this->httpClient->setResponseFactory(
+            new MockResponse((string) file_get_contents(__DIR__.'/Tasks/retrieve_task.json'))
+        );
+
+        $task = 1;
+        $dto = new \Lsv\TimeharvestSdk\Dto\Tasks\UpdateTaskDto();
+        $response = $this->factory->tasks()->updateTask($task, $dto);
+        self::assertStringEndsWith(
+            '/tasks/1',
+            $this->getHttpRequestOptions()['url']
+        );
+        self::assertInstanceOf(TaskData::class, $response->getData());
+    }
+
+    public function testUpdateTaskByTask(): void
+    {
+        $this->httpClient->setResponseFactory(
+            new MockResponse((string) file_get_contents(__DIR__.'/Tasks/retrieve_task.json'))
+        );
+
+        $task = new TaskData();
+        $task->id = 2;
+        $dto = new \Lsv\TimeharvestSdk\Dto\Tasks\UpdateTaskDto();
+        $response = $this->factory->tasks()->updateTask($task, $dto);
+        self::assertStringEndsWith(
+            '/tasks/2',
+            $this->getHttpRequestOptions()['url']
+        );
+        self::assertInstanceOf(TaskData::class, $response->getData());
+    }
 }
