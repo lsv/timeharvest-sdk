@@ -24,10 +24,10 @@ permalink: docs/todo
     - [ ] Categories
 - [x] [Tasks]({% link docs/tasks/tasks.md %})
 - [ ] Time Entries
-- [ ] Projects
+- [x] [Projects]({% link docs/projects/projects.md %})
     - [ ] User assignments
     - [ ] Task assignments
-    - [ ] Projects
+    - [x] [Projects]({% link docs/projects/project.md %})
 - [ ] Roles
 - [x] [Users]({% link docs/users/users.md %})
     - [ ] Teammates
