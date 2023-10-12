@@ -12,6 +12,7 @@ use Lsv\TimeharvestSdk\Request\Projects\ListProjects;
 use Lsv\TimeharvestSdk\Request\Projects\RetrieveProject;
 use Lsv\TimeharvestSdk\Request\Projects\TaskAssignmentFactory;
 use Lsv\TimeharvestSdk\Request\Projects\UpdateProject;
+use Lsv\TimeharvestSdk\Request\Projects\UserAssignmentFactory;
 use Lsv\TimeharvestSdk\RequestFactory;
 use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
 use Lsv\TimeharvestSdk\Response\MetaResponse;
@@ -55,5 +56,10 @@ readonly class ProjectsFactory
     public function taskAssignments(): TaskAssignmentFactory
     {
         return new TaskAssignmentFactory($this->factory);
+    }
+
+    public function userAssignments(): UserAssignmentFactory
+    {
+        return new UserAssignmentFactory($this->factory);
     }
 }
