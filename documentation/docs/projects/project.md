@@ -7,6 +7,7 @@ singleResponse: \Lsv\TimeharvestSdk\Response\Project\ProjectResponse
 createDto: \Lsv\TimeharvestSdk\Dto\Projects\CreateProjectDto
 updateDto: \Lsv\TimeharvestSdk\Dto\Projects\UpdateProjectDto
 factory: $factory->projects()
+nav_order: 1
 ---
 
 <details markdown="block">

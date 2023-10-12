@@ -10,6 +10,7 @@ use Lsv\TimeharvestSdk\Request\Projects\CreateProject;
 use Lsv\TimeharvestSdk\Request\Projects\DeleteProject;
 use Lsv\TimeharvestSdk\Request\Projects\ListProjects;
 use Lsv\TimeharvestSdk\Request\Projects\RetrieveProject;
+use Lsv\TimeharvestSdk\Request\Projects\TaskAssignmentFactory;
 use Lsv\TimeharvestSdk\Request\Projects\UpdateProject;
 use Lsv\TimeharvestSdk\RequestFactory;
 use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
@@ -49,5 +50,10 @@ readonly class ProjectsFactory
     public function deleteProject(int|ProjectData $project): NullResponse
     {
         return $this->factory->request(new DeleteProject($project));
+    }
+
+    public function taskAssignments(): TaskAssignmentFactory
+    {
+        return new TaskAssignmentFactory($this->factory);
     }
 }
