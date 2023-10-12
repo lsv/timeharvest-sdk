@@ -6,6 +6,7 @@ namespace Lsv\TimeharvestSdkTest\Request;
 
 use Lsv\TimeharvestSdk\Dto\Projects\CreateProjectDto;
 use Lsv\TimeharvestSdk\Dto\Projects\UpdateProjectDto;
+use Lsv\TimeharvestSdk\Request\Projects\TaskAssignmentFactory;
 use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
 use Lsv\TimeharvestSdk\Response\Project\ProjectData;
 use Lsv\TimeharvestSdk\Response\Project\ProjectResponse;
@@ -174,5 +175,10 @@ class ProjectsFactoryTest extends RequestFactoryTest
             '/projects/2',
             $this->getHttpRequestOptions()['url']
         );
+    }
+
+    public function testTaskAssignments(): void
+    {
+        self::assertInstanceOf(TaskAssignmentFactory::class, $this->factory->projects()->taskAssignments());
     }
 }

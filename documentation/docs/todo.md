@@ -26,7 +26,7 @@ permalink: docs/todo
 - [ ] Time Entries
 - [x] [Projects]({% link docs/projects/projects.md %})
     - [ ] User assignments
-    - [ ] Task assignments
+    - [x] [Task assignments]({% link docs/projects/task-assignments/task-assignments.md %})
     - [x] [Projects]({% link docs/projects/project.md %})
 - [ ] Roles
 - [x] [Users]({% link docs/users/users.md %})
