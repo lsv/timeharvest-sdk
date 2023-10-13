@@ -34,5 +34,6 @@ class RetrieveClientTest extends RequestTestCase
         $client->id = 1;
         $this->factory->request(new RetrieveClient($client));
         self::assertStringEndsWith('1', $this->getHttpRequestOptions()['url']);
+        self::assertSame('https://api.harvestapp.com/v2/clients/1', $this->getHttpRequestOptions()['url']);
     }
 }

@@ -41,9 +41,11 @@ class RequestFactory
 
     public function request(AbstractRequest $request): mixed
     {
+        $uri = str_starts_with($request->getUri(), '/') ? substr($request->getUri(), 1) : $request->getUri();
+
         $this->httpResponse = $this->client->getClient()->request(
             $request->getMethod(),
-            $request->getUri(),
+            $uri,
             [
                 'query' => 'GET' === $request->getMethod() ? $request->getQuery() : null,
                 'json' => 'GET' !== $request->getMethod() ? $request->getQuery() : null,

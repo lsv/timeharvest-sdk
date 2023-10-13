@@ -30,6 +30,7 @@ class UsersFactoryTest extends RequestTestCase
             [],
             $this->getHttpRequestOptions()['query']
         );
+        self::assertSame('https://api.harvestapp.com/v2/users', $this->getHttpRequestOptions()['url']);
     }
 
     public function testMe(): void
