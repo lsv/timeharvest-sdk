@@ -18,7 +18,7 @@ class TimeharvestClientTest extends TestCase
         $ref = new \ReflectionClass($client);
         $options = $ref->getProperty('defaultOptions')->getValue($client);
         self::assertSame('token', $options['auth_bearer']);
-        self::assertSame('https://api.harvestapp.com/v2', $options['base_uri']);
+        self::assertSame('https://api.harvestapp.com/v2/', $options['base_uri']);
         self::assertSame([
             'Harvest-Account-Id: account',
             'User-Agent: lsv/timeharvest-sdk',

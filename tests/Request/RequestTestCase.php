@@ -18,7 +18,7 @@ abstract class RequestTestCase extends TestCase
 
     protected function setUp(): void
     {
-        $this->httpClient = new MockHttpClient();
+        $this->httpClient = new MockHttpClient(baseUri: 'https://api.harvestapp.com/v2/');
         $timeharvestClient = new class($this->httpClient) implements TimeharvestClientInterface {
             public function __construct(private readonly HttpClientInterface $client)
             {

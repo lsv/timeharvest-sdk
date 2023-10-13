@@ -16,8 +16,6 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-use function PHPUnit\Framework\assertIsArray;
-
 class Serializer
 {
     /**
@@ -29,8 +27,13 @@ class Serializer
             AbstractObjectNormalizer::SKIP_NULL_VALUES => true,
         ]);
 
+        // @codeCoverageIgnoreStart
         /* @infection-ignore-all */
-        assertIsArray($output);
+        if (!is_array($output)) {
+            /* @infection-ignore-all */
+            throw new \RuntimeException('Output is not an array');
+        }
+        // @codeCoverageIgnoreEnd
 
         return $output;
     }

@@ -10,7 +10,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 readonly class TimeharvestClient implements TimeharvestClientInterface
 {
     private const USER_AGENT = 'lsv/timeharvest-sdk';
-    private const BASE_URI = 'https://api.harvestapp.com/v2';
+    private const BASE_URI = 'https://api.harvestapp.com/v2/';
 
     public function __construct(
         #[\SensitiveParameter] private string $accessToken,

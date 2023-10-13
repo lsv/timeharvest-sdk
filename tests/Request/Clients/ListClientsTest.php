@@ -48,7 +48,7 @@ class ListClientsTest extends RequestTestCase
         self::assertInstanceOf(ClientData::class, $data);
         self::assertSame('123 Industries', $data->name);
         self::assertSame('0a39d3e33c8058cf7c3f8097d854c64e', $data->statementKey);
-        self::assertStringContainsString('Anytown', $data->address);
+        self::assertStringContainsString('Anytown', (string) $data->address);
         self::assertTrue($data->isActive);
         self::assertSame('EUR', $data->currency);
         self::assertSame('2017-06-26', $data->createdAt->format('Y-m-d'));

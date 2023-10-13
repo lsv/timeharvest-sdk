@@ -8,8 +8,8 @@ class TaskData
 {
     public int $id;
     public string $name;
-    public bool $billableByDefault;
-    public float $defaultHourlyRate;
+    public ?bool $billableByDefault;
+    public ?float $defaultHourlyRate;
     public bool $isDefault;
     public bool $isActive;
     public \DateTimeInterface $createdAt;
