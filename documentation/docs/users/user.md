@@ -3,6 +3,7 @@ layout: sub
 title: User
 parent: Users
 dataResponse: \Lsv\TimeharvestSdk\Response\User\UserData
+dataSingleResponse: \Lsv\TimeharvestSdk\Response\User\UserInfoData
 singleResponse: \Lsv\TimeharvestSdk\Response\User\UserResponse
 multiResponse: \Lsv\TimeharvestSdk\Response\User\UsersResponse
 factory: $factory->users()
@@ -77,9 +78,9 @@ $response instanceof {{page.singleResponse}}
 
 #### Parameters
 
-| Parameter | Required | Type                           | Description                                             |
-|-----------|----------|--------------------------------|---------------------------------------------------------|
-| `$user`   | true     | int \| `{{page.dataResponse}}` | The ID or a UserData of the user needed to be retrieved |
+| Parameter | Required | Type                                 | Description                                             |
+|-----------|----------|--------------------------------------|---------------------------------------------------------|
+| `$user`   | true     | int \| `{{page.dataSingleResponse}}` | The ID or a UserData of the user needed to be retrieved |
 
 #### Response
 
@@ -158,21 +159,21 @@ $response instanceof {{page.singleResponse}}
 #### Parameters
 
 
-| Parameter                       | Required | Type                         | Description                                                                              |
-|---------------------------------|----------|------------------------------|------------------------------------------------------------------------------------------|
-| `$user`                         | true     | int\|`{{page.dataResponse}}` | User to update                                                                           |
-| `$firstName`                    | false    | string                       | First name of the user                                                                   |
-| `$lastName`                     | false    | string                       | Last name of the user                                                                    |
-| `$email`                        | false    | string                       | Email of the user                                                                        |
-| `$timezone`                     | false    | string                       | User timezone                                                                            |
-| `$hasAccessToAllFutureProjects` | false    | bool                         | Whether the user should be automatically added to future projects                        |
-| `$isContractor`                 | false    | bool                         | Whether the user is a contractor or an employee                                          |
-| `$isActive`                     | false    | bool                         | Whether the user is active or archived.                                                  |
-| `$weeklyCapacity`               | false    | string                       | The number of hours per week this person is available to work in seconds                 |
-| `$defaultHourlyRate`            | false    | string                       | The billable rate to use for this user when they are added to a project                  |
-| `$costRate`                     | false    | string                       | The cost rate to use for this user when calculating a project’s costs vs billable amount |
-| `$roles`                        | false    | bool                         | Descriptive names of the business roles assigned to this person                          |
-| `$accessRoles`                  | false    | string                       | Access role(s) that determine the user’s permissions in Harvest                          |
+| Parameter                       | Required | Type                               | Description                                                                              |
+|---------------------------------|----------|------------------------------------|------------------------------------------------------------------------------------------|
+| `$user`                         | true     | int\|`{{page.dataSingleResponse}}` | User to update                                                                           |
+| `$firstName`                    | false    | string                             | First name of the user                                                                   |
+| `$lastName`                     | false    | string                             | Last name of the user                                                                    |
+| `$email`                        | false    | string                             | Email of the user                                                                        |
+| `$timezone`                     | false    | string                             | User timezone                                                                            |
+| `$hasAccessToAllFutureProjects` | false    | bool                               | Whether the user should be automatically added to future projects                        |
+| `$isContractor`                 | false    | bool                               | Whether the user is a contractor or an employee                                          |
+| `$isActive`                     | false    | bool                               | Whether the user is active or archived.                                                  |
+| `$weeklyCapacity`               | false    | string                             | The number of hours per week this person is available to work in seconds                 |
+| `$defaultHourlyRate`            | false    | string                             | The billable rate to use for this user when they are added to a project                  |
+| `$costRate`                     | false    | string                             | The cost rate to use for this user when calculating a project’s costs vs billable amount |
+| `$roles`                        | false    | bool                               | Descriptive names of the business roles assigned to this person                          |
+| `$accessRoles`                  | false    | string                             | Access role(s) that determine the user’s permissions in Harvest                          |
 
 
 #### Response
@@ -191,9 +192,9 @@ $response instanceof {{page.singleResponse}}
 
 #### Parameters
 
-| Parameter | Required | Type                           | Description                                            |
-|-----------|----------|--------------------------------|--------------------------------------------------------|
-| `$user`   | true     | int \| `{{page.dataResponse}}` | The ID or a UserData of the user needed to be archived |
+| Parameter | Required | Type                                 | Description                                            |
+|-----------|----------|--------------------------------------|--------------------------------------------------------|
+| `$user`   | true     | int \| `{{page.dataSingleResponse}}` | The ID or a UserData of the user needed to be archived |
 
 #### Response
 
@@ -211,9 +212,9 @@ $response instanceof \Lsv\TimeharvestSdk\Response\NullResponse
 
 #### Parameters
 
-| Parameter | Required | Type                           | Description                                           |
-|-----------|----------|--------------------------------|-------------------------------------------------------|
-| `$user`   | true     | int \| `{{page.dataResponse}}` | The ID or a UserData of the user needed to be deleted |
+| Parameter | Required | Type                                 | Description                                           |
+|-----------|----------|--------------------------------------|-------------------------------------------------------|
+| `$user`   | true     | int \| `{{page.dataSingleResponse}}` | The ID or a UserData of the user needed to be deleted |
 
 #### Response
 

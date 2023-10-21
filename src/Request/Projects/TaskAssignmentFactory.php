@@ -15,7 +15,7 @@ use Lsv\TimeharvestSdk\Request\Projects\TaskAssignments\UpdateTaskAssignment;
 use Lsv\TimeharvestSdk\RequestFactory;
 use Lsv\TimeharvestSdk\Response\MetaResponse;
 use Lsv\TimeharvestSdk\Response\NullResponse;
-use Lsv\TimeharvestSdk\Response\Project\ProjectData;
+use Lsv\TimeharvestSdk\Response\Project\ProjectInfoData;
 use Lsv\TimeharvestSdk\Response\Project\TaskAssignment\TaskAssignmentData;
 use Lsv\TimeharvestSdk\Response\Project\TaskAssignment\TaskAssignmentResponse;
 use Lsv\TimeharvestSdk\Response\Project\TaskAssignment\TaskAssignmentsResponse;
@@ -32,27 +32,27 @@ readonly class TaskAssignmentFactory
         return $this->factory->request(new ListTaskAssignments($isActive, $updatedSince, $meta));
     }
 
-    public function listTaskAssignmentsForProject(int|ProjectData $project, bool $isActive = null, \DateTimeInterface $updatedSince = null, MetaResponse $meta = null): TaskAssignmentsResponse
+    public function listTaskAssignmentsForProject(int|ProjectInfoData $project, bool $isActive = null, \DateTimeInterface $updatedSince = null, MetaResponse $meta = null): TaskAssignmentsResponse
     {
         return $this->factory->request(new ListTaskAssignmentsForProject($project, $isActive, $updatedSince, $meta));
     }
 
-    public function retrieveTaskAssignment(int|ProjectData $project, int|TaskAssignmentData $assignment): TaskAssignmentResponse
+    public function retrieveTaskAssignment(int|ProjectInfoData $project, int|TaskAssignmentData $assignment): TaskAssignmentResponse
     {
         return $this->factory->request(new RetrieveTaskAssignment($project, $assignment));
     }
 
-    public function createTaskAssignment(int|ProjectData $project, CreateTaskAssignmentDto $dto): TaskAssignmentResponse
+    public function createTaskAssignment(int|ProjectInfoData $project, CreateTaskAssignmentDto $dto): TaskAssignmentResponse
     {
         return $this->factory->request(new CreateTaskAssignment($project, $dto));
     }
 
-    public function updateTaskAssignment(int|ProjectData $project, int|TaskAssignmentData $assignment, UpdateTaskAssignmentDto $dto): TaskAssignmentResponse
+    public function updateTaskAssignment(int|ProjectInfoData $project, int|TaskAssignmentData $assignment, UpdateTaskAssignmentDto $dto): TaskAssignmentResponse
     {
         return $this->factory->request(new UpdateTaskAssignment($project, $assignment, $dto));
     }
 
-    public function deleteTaskAssignment(int|ProjectData $project, int|TaskAssignmentData $assignment): NullResponse
+    public function deleteTaskAssignment(int|ProjectInfoData $project, int|TaskAssignmentData $assignment): NullResponse
     {
         return $this->factory->request(new DeleteTaskAssignment($project, $assignment));
     }

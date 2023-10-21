@@ -12,6 +12,7 @@ use Lsv\TimeharvestSdk\Response\Project\ProjectData;
 use Lsv\TimeharvestSdk\Response\Project\UserAssignment\UserAssignmentData;
 use Lsv\TimeharvestSdk\Response\Project\UserAssignment\UserAssignmentResponse;
 use Lsv\TimeharvestSdk\Response\Project\UserAssignment\UserAssignmentsResponse;
+use Lsv\TimeharvestSdk\Response\TimeEntry\TimeEntryUserAssignment;
 use Lsv\TimeharvestSdk\Response\User\UserData;
 use Lsv\TimeharvestSdkTest\RequestFactoryTest;
 use Symfony\Component\HttpClient\Response\MockResponse;
@@ -115,6 +116,24 @@ class UserAssignmentFactoryTest extends RequestFactoryTest
         self::assertNull($response->getMeta());
         self::assertInstanceOf(UserAssignmentResponse::class, $response);
         self::assertInstanceOf(UserAssignmentData::class, $response->getData());
+    }
+
+    public function testRetrieveUserAssignmentByTimeEntryObject(): void
+    {
+        $this->httpClient->setResponseFactory(
+            new MockResponse((string) file_get_contents(__DIR__.'/UserAssignments/retrieve_user_assignment.json'))
+        );
+
+        $project = new ProjectData();
+        $project->id = 22;
+        $user = new TimeEntryUserAssignment();
+        $user->id = 33;
+        $this->factory->projects()->userAssignments()->retrieveUserAssignment($project, $user);
+        self::assertStringEndsWith('GET', $this->getHttpRequestOptions()['method']);
+        self::assertStringEndsWith(
+            '/projects/22/user_assignments/33',
+            $this->getHttpRequestOptions()['url']
+        );
     }
 
     public function testCreateTaskAssignment(): void

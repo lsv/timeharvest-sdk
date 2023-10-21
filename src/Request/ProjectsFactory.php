@@ -17,7 +17,7 @@ use Lsv\TimeharvestSdk\RequestFactory;
 use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
 use Lsv\TimeharvestSdk\Response\MetaResponse;
 use Lsv\TimeharvestSdk\Response\NullResponse;
-use Lsv\TimeharvestSdk\Response\Project\ProjectData;
+use Lsv\TimeharvestSdk\Response\Project\ProjectInfoData;
 use Lsv\TimeharvestSdk\Response\Project\ProjectResponse;
 use Lsv\TimeharvestSdk\Response\Project\ProjectsResponse;
 
@@ -33,7 +33,7 @@ readonly class ProjectsFactory
         return $this->factory->request(new ListProjects($isActive, $client, $updatedSince, $meta));
     }
 
-    public function retrieveProject(int|ProjectData $project): ProjectResponse
+    public function retrieveProject(int|ProjectInfoData $project): ProjectResponse
     {
         return $this->factory->request(new RetrieveProject($project));
     }
@@ -43,12 +43,12 @@ readonly class ProjectsFactory
         return $this->factory->request(new CreateProject($dto));
     }
 
-    public function updateProject(int|ProjectData $project, UpdateProjectDto $dto): ProjectResponse
+    public function updateProject(int|ProjectInfoData $project, UpdateProjectDto $dto): ProjectResponse
     {
         return $this->factory->request(new UpdateProject($project, $dto));
     }
 
-    public function deleteProject(int|ProjectData $project): NullResponse
+    public function deleteProject(int|ProjectInfoData $project): NullResponse
     {
         return $this->factory->request(new DeleteProject($project));
     }

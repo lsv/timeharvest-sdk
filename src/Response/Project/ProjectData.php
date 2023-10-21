@@ -6,11 +6,9 @@ namespace Lsv\TimeharvestSdk\Response\Project;
 
 use Lsv\TimeharvestSdk\Response\Client\ClientInfoData;
 
-class ProjectData
+class ProjectData extends ProjectInfoData
 {
-    public int $id;
     public ClientInfoData $client;
-    public string $name;
     public ?string $code;
     public ?bool $isActive;
     public bool $isBillable;
