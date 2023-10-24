@@ -7,7 +7,7 @@ dataResponse: \Lsv\TimeharvestSdk\Response\Project\UserAssignment\UserAssignment
 singleResponse: \Lsv\TimeharvestSdk\Response\Project\UserAssignment\UserAssignmentResponse
 createDto: \Lsv\TimeharvestSdk\Dto\Projects\UserAssignments\CreateUserAssignmentDto
 updateDto: \Lsv\TimeharvestSdk\Dto\Projects\UserAssignments\UpdateUserAssignmentDto
-projectResponse: \Lsv\TimeharvestSdk\Response\Project\ProjectData
+projectResponse: \Lsv\TimeharvestSdk\Response\Project\ProjectInfoData
 userResponse: \Lsv\TimeharvestSdk\Response\User\UserData
 factory: $factory->projects()->userAssignments()
 ---

@@ -14,7 +14,7 @@ use Lsv\TimeharvestSdk\Request\Tasks\UpdateTask;
 use Lsv\TimeharvestSdk\RequestFactory;
 use Lsv\TimeharvestSdk\Response\MetaResponse;
 use Lsv\TimeharvestSdk\Response\NullResponse;
-use Lsv\TimeharvestSdk\Response\Task\TaskData;
+use Lsv\TimeharvestSdk\Response\Task\TaskInfoData;
 use Lsv\TimeharvestSdk\Response\Task\TaskResponse;
 use Lsv\TimeharvestSdk\Response\Task\TasksResponse;
 
@@ -30,7 +30,7 @@ readonly class TasksFactory
         return $this->factory->request(new ListTasks($isActive, $updatedSince, $meta));
     }
 
-    public function retrieveTask(int|TaskData $task): TaskResponse
+    public function retrieveTask(int|TaskInfoData $task): TaskResponse
     {
         return $this->factory->request(new RetrieveTask($task));
     }
@@ -40,12 +40,12 @@ readonly class TasksFactory
         return $this->factory->request(new CreateTask($dto));
     }
 
-    public function updateTask(int|TaskData $task, UpdateTaskDto $dto): TaskResponse
+    public function updateTask(int|TaskInfoData $task, UpdateTaskDto $dto): TaskResponse
     {
         return $this->factory->request(new UpdateTask($task, $dto));
     }
 
-    public function deleteTask(int|TaskData $task): NullResponse
+    public function deleteTask(int|TaskInfoData $task): NullResponse
     {
         return $this->factory->request(new DeleteTask($task));
     }

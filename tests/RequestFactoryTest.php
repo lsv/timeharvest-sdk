@@ -7,6 +7,7 @@ namespace Lsv\TimeharvestSdkTest;
 use Lsv\TimeharvestSdk\Request\ClientsFactory;
 use Lsv\TimeharvestSdk\Request\ProjectsFactory;
 use Lsv\TimeharvestSdk\Request\TasksFactory;
+use Lsv\TimeharvestSdk\Request\TimeEntriesFactory;
 use Lsv\TimeharvestSdk\Request\UsersFactory;
 use Lsv\TimeharvestSdkTest\Request\RequestTestCase;
 
@@ -30,5 +31,10 @@ class RequestFactoryTest extends RequestTestCase
     public function testProjectsFactory(): void
     {
         self::assertInstanceOf(ProjectsFactory::class, $this->factory->projects());
+    }
+
+    public function testTimeEntriesFactory(): void
+    {
+        self::assertInstanceOf(TimeEntriesFactory::class, $this->factory->timeEntries());
     }
 }

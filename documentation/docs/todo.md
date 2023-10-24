@@ -23,7 +23,7 @@ permalink: docs/todo
     - [ ] Expenses
     - [ ] Categories
 - [x] [Tasks]({% link docs/tasks/tasks.md %})
-- [ ] Time Entries
+- [x] [Time Entries]({% link docs/time-entries/time-entries.md %})
 - [x] [Projects]({% link docs/projects/projects.md %})
     - [x] [User assignments]({% link docs/projects/user-assignments/user-assignments.md %})
     - [x] [Task assignments]({% link docs/projects/task-assignments/task-assignments.md %})

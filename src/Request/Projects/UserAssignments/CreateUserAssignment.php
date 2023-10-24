@@ -6,7 +6,7 @@ namespace Lsv\TimeharvestSdk\Request\Projects\UserAssignments;
 
 use Lsv\TimeharvestSdk\Dto\Projects\UserAssignments\CreateUserAssignmentDto;
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
-use Lsv\TimeharvestSdk\Response\Project\ProjectData;
+use Lsv\TimeharvestSdk\Response\Project\ProjectInfoData;
 use Lsv\TimeharvestSdk\Response\Project\UserAssignment\UserAssignmentData;
 use Lsv\TimeharvestSdk\Response\Project\UserAssignment\UserAssignmentResponse;
 use Lsv\TimeharvestSdk\Serializer;
@@ -15,7 +15,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class CreateUserAssignment extends AbstractRequest
 {
     public function __construct(
-        private readonly int|ProjectData $project,
+        private readonly int|ProjectInfoData $project,
         public readonly CreateUserAssignmentDto $dto
     ) {
     }
@@ -28,7 +28,7 @@ class CreateUserAssignment extends AbstractRequest
     public function getUri(): string
     {
         $project = $this->project;
-        if ($project instanceof ProjectData) {
+        if ($project instanceof ProjectInfoData) {
             $project = $project->id;
         }
 

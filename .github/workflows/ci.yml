@@ -4,6 +4,10 @@ on:
   pull_request:
   push:
 
+concurrency:
+  group: "ci"
+  cancel-in-progress: true
+
 jobs:
   ci:
     strategy:

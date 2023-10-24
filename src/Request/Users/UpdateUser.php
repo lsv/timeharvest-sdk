@@ -7,6 +7,7 @@ namespace Lsv\TimeharvestSdk\Request\Users;
 use Lsv\TimeharvestSdk\Dto\User\UpdateUserDto;
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Response\User\UserData;
+use Lsv\TimeharvestSdk\Response\User\UserInfoData;
 use Lsv\TimeharvestSdk\Response\User\UserResponse;
 use Lsv\TimeharvestSdk\Serializer;
 use Symfony\Contracts\HttpClient\ResponseInterface;
@@ -14,7 +15,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class UpdateUser extends AbstractRequest
 {
     public function __construct(
-        private readonly int|UserData $user,
+        private readonly int|UserInfoData $user,
         public readonly UpdateUserDto $update,
     ) {
     }
@@ -26,7 +27,7 @@ class UpdateUser extends AbstractRequest
 
     public function getUri(): string
     {
-        $id = $this->user instanceof UserData ? $this->user->id : $this->user;
+        $id = $this->user instanceof UserInfoData ? $this->user->id : $this->user;
 
         return 'users/'.$id;
     }

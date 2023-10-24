@@ -3,6 +3,7 @@ layout: sub
 title: Task
 parent: Tasks
 dataResponse: \Lsv\TimeharvestSdk\Response\Task\TaskData
+singleDataResponse: \Lsv\TimeharvestSdk\Response\Task\TaskData
 singleResponse: \Lsv\TimeharvestSdk\Response\Task\TaskResponse
 createDto: \Lsv\TimeharvestSdk\Dto\Tasks\CreateTaskDto
 updateDto: \Lsv\TimeharvestSdk\Dto\Tasks\UpdateTaskDto
@@ -57,9 +58,9 @@ $response = {{page.factory}}->retriveTask($task);
 
 #### Parameters
 
-| Parameter | Required | Type                           | Description                                             |
-|-----------|----------|--------------------------------|---------------------------------------------------------|
-| `$task`   | true     | int \| `{{page.dataResponse}}` | The ID or a TaskData of the task needed to be retrieved |
+| Parameter | Required | Type                                 | Description                                             |
+|-----------|----------|--------------------------------------|---------------------------------------------------------|
+| `$task`   | true     | int \| `{{page.singleDataResponse}}` | The ID or a TaskData of the task needed to be retrieved |
 
 #### Response
 
@@ -103,14 +104,14 @@ $response = {{page.factory}}->updateTask($task, $dto);
 
 #### Parameters
 
-| Parameter            | Required | Type                           | Description                                                                                      |
-|----------------------|----------|--------------------------------|--------------------------------------------------------------------------------------------------|
-| `$task`              | true     | int \| `{{page.dataResponse}}` | The ID or a TaskData of the task needed to be updated                                            |
-| `$name`              | false    | string                         | Name of the task                                                                                 |
-| `$billableByDefault` | false    | bool                           | Used in determining whether default tasks should be marked billable when creating a new project. |
-| `$defaultHourlyRate` | false    | float                          | The default hourly rate to use for this task when it is added to a project                       |
-| `$isDefault`         | false    | bool                           | Whether this task should be automatically added to future projects                               |
-| `$isActive`          | false    | bool                           | Whether this task is active or archived                                                          |
+| Parameter            | Required | Type                                 | Description                                                                                      |
+|----------------------|----------|--------------------------------------|--------------------------------------------------------------------------------------------------|
+| `$task`              | true     | int \| `{{page.singleDataResponse}}` | The ID or a TaskData of the task needed to be updated                                            |
+| `$name`              | false    | string                               | Name of the task                                                                                 |
+| `$billableByDefault` | false    | bool                                 | Used in determining whether default tasks should be marked billable when creating a new project. |
+| `$defaultHourlyRate` | false    | float                                | The default hourly rate to use for this task when it is added to a project                       |
+| `$isDefault`         | false    | bool                                 | Whether this task should be automatically added to future projects                               |
+| `$isActive`          | false    | bool                                 | Whether this task is active or archived                                                          |
 
 #### Response
 
@@ -128,7 +129,7 @@ $response->getData() instanceof {{page.dataResponse}}
 
 #### Parameters
 
-| Parameter | Required | Type                           | Description                                           |
-|-----------|----------|--------------------------------|-------------------------------------------------------|
-| `$task`   | true     | int \| `{{page.dataResponse}}` | The ID or a TaskData of the task needed to be deleted |
+| Parameter | Required | Type                                 | Description                                           |
+|-----------|----------|--------------------------------------|-------------------------------------------------------|
+| `$task`   | true     | int \| `{{page.singleDataResponse}}` | The ID or a TaskData of the task needed to be deleted |
 

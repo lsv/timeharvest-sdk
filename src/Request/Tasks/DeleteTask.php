@@ -6,13 +6,13 @@ namespace Lsv\TimeharvestSdk\Request\Tasks;
 
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Response\NullResponse;
-use Lsv\TimeharvestSdk\Response\Task\TaskData;
+use Lsv\TimeharvestSdk\Response\Task\TaskInfoData;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class DeleteTask extends AbstractRequest
 {
     public function __construct(
-        private readonly int|TaskData $task
+        private readonly int|TaskInfoData $task
     ) {
     }
 
@@ -23,7 +23,7 @@ class DeleteTask extends AbstractRequest
 
     public function getUri(): string
     {
-        $id = $this->task instanceof TaskData ? $this->task->id : $this->task;
+        $id = $this->task instanceof TaskInfoData ? $this->task->id : $this->task;
 
         return 'tasks/'.$id;
     }

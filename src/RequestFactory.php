@@ -8,6 +8,7 @@ use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Request\ClientsFactory;
 use Lsv\TimeharvestSdk\Request\ProjectsFactory;
 use Lsv\TimeharvestSdk\Request\TasksFactory;
+use Lsv\TimeharvestSdk\Request\TimeEntriesFactory;
 use Lsv\TimeharvestSdk\Request\UsersFactory;
 
 class RequestFactory
@@ -37,6 +38,11 @@ class RequestFactory
     public function projects(): ProjectsFactory
     {
         return new ProjectsFactory($this);
+    }
+
+    public function timeEntries(): TimeEntriesFactory
+    {
+        return new TimeEntriesFactory($this);
     }
 
     public function request(AbstractRequest $request): mixed

@@ -6,13 +6,13 @@ namespace Lsv\TimeharvestSdk\Request\Projects;
 
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Response\NullResponse;
-use Lsv\TimeharvestSdk\Response\Project\ProjectData;
+use Lsv\TimeharvestSdk\Response\Project\ProjectInfoData;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class DeleteProject extends AbstractRequest
 {
     public function __construct(
-        private readonly int|ProjectData $project
+        private readonly int|ProjectInfoData $project
     ) {
     }
 
@@ -24,7 +24,7 @@ class DeleteProject extends AbstractRequest
     public function getUri(): string
     {
         $id = $this->project;
-        if ($id instanceof ProjectData) {
+        if ($id instanceof ProjectInfoData) {
             $id = $id->id;
         }
 

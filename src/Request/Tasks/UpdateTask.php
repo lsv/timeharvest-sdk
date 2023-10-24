@@ -7,6 +7,7 @@ namespace Lsv\TimeharvestSdk\Request\Tasks;
 use Lsv\TimeharvestSdk\Dto\Tasks\UpdateTaskDto;
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Response\Task\TaskData;
+use Lsv\TimeharvestSdk\Response\Task\TaskInfoData;
 use Lsv\TimeharvestSdk\Response\Task\TaskResponse;
 use Lsv\TimeharvestSdk\Serializer;
 use Symfony\Contracts\HttpClient\ResponseInterface;
@@ -14,7 +15,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class UpdateTask extends AbstractRequest
 {
     public function __construct(
-        private int|TaskData $task,
+        private int|TaskInfoData $task,
         public readonly UpdateTaskDto $dto
     ) {
     }
@@ -26,7 +27,7 @@ class UpdateTask extends AbstractRequest
 
     public function getUri(): string
     {
-        $id = $this->task instanceof TaskData ? $this->task->id : $this->task;
+        $id = $this->task instanceof TaskInfoData ? $this->task->id : $this->task;
 
         return '/tasks/'.$id;
     }

@@ -6,14 +6,14 @@ namespace Lsv\TimeharvestSdk\Request\Projects\UserAssignments;
 
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Response\NullResponse;
-use Lsv\TimeharvestSdk\Response\Project\ProjectData;
+use Lsv\TimeharvestSdk\Response\Project\ProjectInfoData;
 use Lsv\TimeharvestSdk\Response\Project\UserAssignment\UserAssignmentData;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class DeleteUserAssignment extends AbstractRequest
 {
     public function __construct(
-        private readonly int|ProjectData $project,
+        private readonly int|ProjectInfoData $project,
         private readonly int|UserAssignmentData $assignment,
     ) {
     }
@@ -26,7 +26,7 @@ class DeleteUserAssignment extends AbstractRequest
     public function getUri(): string
     {
         $project = $this->project;
-        if ($project instanceof ProjectData) {
+        if ($project instanceof ProjectInfoData) {
             $project = $project->id;
         }
 

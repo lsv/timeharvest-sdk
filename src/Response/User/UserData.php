@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Response\User;
 
-class UserData
+class UserData extends UserInfoData
 {
-    public int $id;
     public string $firstName;
     public string $lastName;
     public string $email;

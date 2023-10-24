@@ -6,6 +6,7 @@ namespace Lsv\TimeharvestSdk\Request\Projects;
 
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Response\Project\ProjectData;
+use Lsv\TimeharvestSdk\Response\Project\ProjectInfoData;
 use Lsv\TimeharvestSdk\Response\Project\ProjectResponse;
 use Lsv\TimeharvestSdk\Serializer;
 use Symfony\Contracts\HttpClient\ResponseInterface;
@@ -13,14 +14,14 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class RetrieveProject extends AbstractRequest
 {
     public function __construct(
-        readonly private int|ProjectData $project
+        readonly private int|ProjectInfoData $project
     ) {
     }
 
     public function getUri(): string
     {
         $id = $this->project;
-        if ($id instanceof ProjectData) {
+        if ($id instanceof ProjectInfoData) {
             $id = $id->id;
         }
 

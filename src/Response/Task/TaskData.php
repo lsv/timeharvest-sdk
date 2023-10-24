@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Lsv\TimeharvestSdk\Response\Task;
 
-class TaskData
+class TaskData extends TaskInfoData
 {
-    public int $id;
-    public string $name;
     public ?bool $billableByDefault;
     public ?float $defaultHourlyRate;
     public bool $isDefault;

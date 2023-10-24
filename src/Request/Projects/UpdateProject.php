@@ -7,6 +7,7 @@ namespace Lsv\TimeharvestSdk\Request\Projects;
 use Lsv\TimeharvestSdk\Dto\Projects\UpdateProjectDto;
 use Lsv\TimeharvestSdk\Request\AbstractRequest;
 use Lsv\TimeharvestSdk\Response\Project\ProjectData;
+use Lsv\TimeharvestSdk\Response\Project\ProjectInfoData;
 use Lsv\TimeharvestSdk\Response\Project\ProjectResponse;
 use Lsv\TimeharvestSdk\Serializer;
 use Symfony\Contracts\HttpClient\ResponseInterface;
@@ -14,7 +15,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class UpdateProject extends AbstractRequest
 {
     public function __construct(
-        private readonly int|ProjectData $project,
+        private readonly int|ProjectInfoData $project,
         public readonly UpdateProjectDto $dto
     ) {
     }
@@ -27,7 +28,7 @@ class UpdateProject extends AbstractRequest
     public function getUri(): string
     {
         $id = $this->project;
-        if ($id instanceof ProjectData) {
+        if ($id instanceof ProjectInfoData) {
             $id = $id->id;
         }
 
